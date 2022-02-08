@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 letterEl.classList.add("animate__flipInX");
                 letterEl.style = `background-color:${tileColor};border-color:"${tileColor}`;
 
-            }, interval)
+            }, interval * index)
         });
 
         guessedWordCount += 1;
