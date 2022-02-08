@@ -1,24 +1,38 @@
-// Test case: If letter correctly guessed is placed multiple times
-// E.g. WOGDD (correct: WOULD) has the first D to be yellow and the second D to be green 
+// TODO: implement words api to check word is real
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    createSquares();
-
-    let solutions = ["would", "you", "be", "my", "valentine"];
+    let solutions = ["night", "stars", "would", "you", "be", "my", "valentine"];           // EVERYTHING HAS TO BE LOWERCASE
     let solutionCount = -1;
-    let word;                                                                   // change word
-    getNewWord();
-
+    let finalMessageCount = 0;                                                              // final message count is for valentine's day
+    let fillerWordsCount = 2;                                                               // filler words count is for valentine's day
+    let word;                                                               
+    
     let guessedWords = [[]]
     let availableSpace = 1;
     let guessedWordCount = 0;
+    finished = false;
 
     const keys = document.querySelectorAll(".keyboard-row button")
+    
+    getNewWord();
+    createSquares();
 
     function getNewWord() {
+        finalMessageCount = finalMessageCount + 1;                                          // final message count is for valentine's day
+        fillerWordsCount = fillerWordsCount - 1;                                            // filler words count is for valentine's day
         solutionCount = solutionCount + 1;
         word = solutions[solutionCount];
+        availableSpace = 1;
+        guessedWords = [[]]
+        guessedWordCount = 0;
+        finished = false;
+
+        if (word.length >= 8) {
+            let game = document.getElementById("game");
+            game.style.maxWidth = "800px";
+        }
+
     }
 
     function getCurrentWordArr() {
@@ -29,8 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateGuessedWords(letter) {
         const currentWordArr = getCurrentWordArr();
 
-        if (currentWordArr && currentWordArr.length < 5) {           // this creates word limit to 5 letters 
-            // if (currentWordArr && currentWordArr.length < 3) for 3 letter words             
+        if (currentWordArr && currentWordArr.length < word.length) {           
             currentWordArr.push(letter);
 
             const availableSpaceEl = document.getElementById(String(availableSpace));
@@ -42,16 +55,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function getTileColor(letter, index) {
+
         const isCorrectLetter = word.includes(letter);
 
         if (!isCorrectLetter) {
-            return "regb(58, 58, 60)";
+            return "rgb(58, 58, 60)";
         }
 
         const letterInThatPosition = word.charAt(index);
         const isCorrectPosition = (letter === letterInThatPosition);
 
         if (isCorrectPosition) {
+            if (fillerWordsCount > 0) {
+                return "rgb(83, 141, 78)"
+            } 
             return "rgb(202, 114, 204)";                    // Pink color is correct color for valentine's
         }
 
@@ -60,13 +77,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function handleSubmitWord() {
         const currentWordArr = getCurrentWordArr()
-        if (currentWordArr.length!==5) {                    // Change this to 3 letters for the word "You", for example
-            window.alert("Word must be 5 letters");                  
+        if (currentWordArr.length!==word.length) {                    
+            window.alert("Word must be " + String(word.length) + " letters");  
+            return;                
         }
 
         const currentWord = currentWordArr.join("");
 
-        const firstLetterId = guessedWordCount * 5 + 1;     // Change 5 to max limit of letters, if needed
+        const firstLetterId = guessedWordCount * word.length + 1;   
         const interval = 200;
         currentWordArr.forEach((letter, index) => {
             setTimeout(() => {
@@ -82,21 +100,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
         guessedWordCount += 1;
 
-        if (currentWord === word) {                          // Change this to words for Valentine's
-            window.alert("Congratulations!");
+        if (currentWord === word) {   
+            if (finalMessageCount != solutions.length) {
+                window.alert("Congratulations!");
+            } else {
+                window.alert("So, is that a yes? :D")                   // final message is for Valentine's day
+            }                       
+  
+            finished = true;
         }
 
         if (guessedWords.length === 6) {
             window.alert("Sorry, you have no more guesses!")
         }
 
-        guessedWords.push([]) // pushes an empty array for next word to guess
+        guessedWords.push([]) 
+    }
+
+    function removeSquares() {
+        const gameBoard = document.getElementById("board")
+
+        console.log("test")
+
+        for (let index = 0; index < word.length * 6; index++) {          
+            let square = document.getElementById(index + 1);
+            gameBoard.removeChild(square);
+        }
     }
 
     function createSquares() {
-        const gameBoard = document.getElementById("board")
+        const gameBoard = document.getElementById("board");
+        
+        gameBoard.style.gridTemplateColumns = "repeat(" + word.length + ", 1fr)";
 
-        for (let index = 0; index < 30; index++) {          // change number of squares for word
+        for (let index = 0; index < word.length * 6; index++) {         
             let square = document.createElement("div");
             square.classList.add("square");
             square.classList.add("animate__animated");
@@ -123,6 +160,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (letter == "enter") {
                 handleSubmitWord();
+                
+                if (finished === true) {
+                    setTimeout(() => {
+                        removeSquares();
+                        getNewWord();
+                        createSquares();
+                    }, 1000);
+                }
+                
                 return;
             }
 
