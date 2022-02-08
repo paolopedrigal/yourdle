@@ -5,12 +5,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     createSquares();
 
+    let solutions = ["would", "you", "be", "my", "valentine"];
+    let solutionCount = -1;
+    let word;                                                                   // change word
+    getNewWord();
+
     let guessedWords = [[]]
     let availableSpace = 1;
-    let word = "would"                                                            // change word
     let guessedWordCount = 0;
 
     const keys = document.querySelectorAll(".keyboard-row button")
+
+    function getNewWord() {
+        solutionCount = solutionCount + 1;
+        word = solutions[solutionCount];
+    }
 
     function getCurrentWordArr() {
         const numberOfGuessedWords = guessedWords.length;
