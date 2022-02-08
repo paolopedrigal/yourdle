@@ -70,7 +70,7 @@ header {
 
 }
 
-.keyboard-container {
+#keyboard-container {
     height: 200px; 
 }
 
@@ -85,7 +85,7 @@ header {
 .keyboard-row button {
     font-family: inherit;
     font-weight: bold;
-    border: 9;
+    border: 0;
     padding: 0;
     height: 58px;
     cursor: pointer;

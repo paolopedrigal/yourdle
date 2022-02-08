@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let solutionCount = -1;
     let finalMessageCount = 0;                                                              // final message count is for valentine's day
     let fillerWordsCount = 2;                                                               // filler words count is for valentine's day
+    fillerWordsCount = fillerWordsCount + 1;                                                // fixing bug 
     let word;                                                               
     
     let guessedWords = [[]]
@@ -27,6 +28,12 @@ document.addEventListener("DOMContentLoaded", () => {
         guessedWords = [[]]
         guessedWordCount = 0;
         finished = false;
+
+        const button = document.getElementsByTagName("button");
+        for (let i = 0; i < button.length; i++) {
+            button.item(i).style.backgroundColor = "rgb(129, 131, 132)";
+        }
+
 
         if (word.length >= 8) {
             let game = document.getElementById("game");
@@ -56,9 +63,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function getTileColor(letter, index) {
 
+        const keyboardButton = document.getElementById(letter);
         const isCorrectLetter = word.includes(letter);
 
         if (!isCorrectLetter) {
+            keyboardButton.style.backgroundColor = "rgb(58, 58, 60)";
             return "rgb(58, 58, 60)";
         }
 
@@ -67,12 +76,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (isCorrectPosition) {
             if (fillerWordsCount > 0) {
-                return "rgb(83, 141, 78)"
+                keyboardButton.style.backgroundColor = "rgb(83, 141, 78)";
+                return "rgb(83, 141, 78)";
             } 
+            keyboardButton.style.backgroundColor = "rgb(202, 114, 204)";
             return "rgb(202, 114, 204)";                    // Pink color is correct color for valentine's
         }
 
-        return "rgb(181, 159, 59)"
+        keyboardButton.style.backgroundColor = "rgb(181, 159, 59)";
+        return "rgb(181, 159, 59)";
     }
 
     function handleSubmitWord() {
@@ -119,8 +131,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function removeSquares() {
         const gameBoard = document.getElementById("board")
-
-        console.log("test")
 
         for (let index = 0; index < word.length * 6; index++) {          
             let square = document.getElementById(index + 1);
