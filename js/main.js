@@ -1,3 +1,6 @@
+// Test case: If letter correctly guessed is placed multiple times
+// E.g. WOGDD (correct: WOULD) has the first D to be yellow and the second D to be green 
+
 document.addEventListener("DOMContentLoaded", () => {
 
     createSquares();
@@ -29,6 +32,23 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    function getTileColor(letter, index) {
+        const isCorrectLetter = word.includes(letter);
+
+        if (!isCorrectLetter) {
+            return "regb(58, 58, 60)";
+        }
+
+        const letterInThatPosition = word.charAt(index);
+        const isCorrectPosition = (letter === letterInThatPosition);
+
+        if (isCorrectPosition) {
+            return "rgb(202, 114, 204)";                    // Pink color is correct color for valentine's
+        }
+
+        return "rgb(181, 159, 59)"
+    }
+
     function handleSubmitWord() {
         const currentWordArr = getCurrentWordArr()
         if (currentWordArr.length!==5) {                    // Change this to 3 letters for the word "You", for example
@@ -41,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const interval = 200;
         currentWordArr.forEach((letter, index) => {
             setTimeout(() => {
-                const tileColor = "rgb(58, 58, 60)";
+                const tileColor = getTileColor(letter, index);
 
                 const letterId = firstLetterId + index;
                 const letterEl = document.getElementById(letterId);
