@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (currentWordArr && currentWordArr.length < 5) {
             currentWordArr.push(letter);
 
-            const availableSpaceEl = document.getElementById(String(1));
+            const availableSpaceEl = document.getElementById(String(availableSpace));
             availableSpace = availableSpace + 1;
 
             availableSpaceEl.textContent = letter;
