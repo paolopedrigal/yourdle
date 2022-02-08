@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let guessedWords = [[]]
     let availableSpace = 1;
-    let word = "would"
+    let word = "would"                                                            // change word
     let guessedWordCount = 0;
 
     const keys = document.querySelectorAll(".keyboard-row button")
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function createSquares() {
         const gameBoard = document.getElementById("board")
 
-        for (let index = 0; index < 30; index++) {
+        for (let index = 0; index < 30; index++) {          // change number of squares for word
             let square = document.createElement("div");
             square.classList.add("square");
             square.classList.add("animate__animated");
@@ -96,12 +96,29 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    function handleDeleteLetter() {
+        const currentWordArr = getCurrentWordArr();
+        const removedLetter = currentWordArr.pop()
+
+        guessedWords[guessedWords.length - 1] = currentWordArr;
+
+        const lastLetterEl = document.getElementById(String(availableSpace - 1));
+
+        lastLetterEl.textContent = "";
+        availableSpace = availableSpace - 1;
+    }
+
     for (let i = 0; i < keys.length; i++) {
         keys[i].onclick = ({target}) => {
             const letter = target.getAttribute("data-key");
 
             if (letter == "enter") {
                 handleSubmitWord();
+                return;
+            }
+
+            if (letter === "del") {
+                handleDeleteLetter();
                 return;
             }
 
