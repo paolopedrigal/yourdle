@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function handleDeleteLetter() {
         const currentWordArr = getCurrentWordArr();
-                                                        
+                                                    
         if (currentWordArr.length > 0 ){
             const removedLetter = currentWordArr.pop()
             guessedWords[guessedWords.length - 1] = currentWordArr;
