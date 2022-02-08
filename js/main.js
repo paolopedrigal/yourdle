@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         removeSquares();
                         getNewWord();
                         createSquares();
-                    }, 1500);
+                    }, 2500);
                 }
                 
                 return;
