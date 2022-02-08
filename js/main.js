@@ -16,7 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateGuessedWords(letter) {
         const currentWordArr = getCurrentWordArr();
 
-        if (currentWordArr && currentWordArr.length < 5) {
+        if (currentWordArr && currentWordArr.length < 5) {           // this creates word limit to 5 letters 
+            // if (currentWordArr && currentWordArr.length < 3) for 3 letter words             
             currentWordArr.push(letter);
 
             const availableSpaceEl = document.getElementById(String(availableSpace));
@@ -30,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function handleSubmitWord() {
         const currentWordArr = getCurrentWordArr()
         if (currentWordArr.length!==5) {
-            window.alert("Word must be 5 letter")
+            window.alert("Word must be 5 letters")                  // Change this to 3 letters for the word "You"
         }
     }
 
