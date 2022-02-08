@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 keyboardButton.style.backgroundColor = "rgb(83, 141, 78)";
                 return "rgb(83, 141, 78)";
             } 
-            keyboardButton.style.backgroundColor = "rgb(202, 114, 204)";
+            keyboardButton.style.backgroundColor = "rgb(202, 114, 204)";  // Pink color is correct color for valentine's
             return "rgb(202, 114, 204)";                    // Pink color is correct color for valentine's
         }
 
@@ -124,6 +124,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (guessedWords.length === 6) {
             window.alert("Sorry, you have no more guesses!")
+            setTimeout(() => {
+                window.location.reload()
+            }, 2000);
         }
 
         guessedWords.push([]) 
@@ -176,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         removeSquares();
                         getNewWord();
                         createSquares();
-                    }, 1000);
+                    }, 1500);
                 }
                 
                 return;
