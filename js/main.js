@@ -2,10 +2,10 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    let solutions = ["would", "you", "be", "my", "valentine"];           // EVERYTHING HAS TO BE LOWERCASE
+    let solutions = ["i", "love", "you", "would", "you", "be", "my", "valentine"];           // EVERYTHING HAS TO BE LOWERCASE
     let solutionCount = -1;
     let finalMessageCount = 0;                                                              // final message count is for valentine's day
-    let fillerWordsCount = 0;                                                               // filler words count is for valentine's day
+    let fillerWordsCount = 3;                                                               // filler words count is for valentine's day
     fillerWordsCount = fillerWordsCount + 1;                                                // fixing bug 
     let word;                                                               
     
