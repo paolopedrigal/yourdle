@@ -2,10 +2,10 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    let solutions = ["night", "stars", "would", "you", "be", "my", "valentine"];           // EVERYTHING HAS TO BE LOWERCASE
+    let solutions = ["would", "you", "be", "my", "valentine"];           // EVERYTHING HAS TO BE LOWERCASE
     let solutionCount = -1;
     let finalMessageCount = 0;                                                              // final message count is for valentine's day
-    let fillerWordsCount = 2;                                                               // filler words count is for valentine's day
+    let fillerWordsCount = 0;                                                               // filler words count is for valentine's day
     fillerWordsCount = fillerWordsCount + 1;                                                // fixing bug 
     let word;                                                               
     
@@ -31,9 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const button = document.getElementsByTagName("button");
         for (let i = 0; i < button.length; i++) {
-            button.item(i).style.backgroundColor = "rgb(129, 131, 132)";
+            button.item(i).style.backgroundColor = "rgb(211, 214, 218)";
+            button.item(i).style.color = "black"; // light theme
+            // Dark theme: button.item(i).style.backgroundColor = "rgb(129, 131, 132)";
         }
-
 
         if (word.length >= 8) {
             let game = document.getElementById("game");
@@ -67,8 +68,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const isCorrectLetter = word.includes(letter);
 
         if (!isCorrectLetter) {
+            keyboardButton.style.color = "white"; // light theme
+            keyboardButton.style.backgroundColor = "rgb(129, 131, 132)";
+            return "rgb(129, 131, 132)";
+
+            /*
+            Dark theme:
             keyboardButton.style.backgroundColor = "rgb(58, 58, 60)";
             return "rgb(58, 58, 60)";
+            */
         }
 
         const letterInThatPosition = word.charAt(index);
@@ -76,13 +84,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (isCorrectPosition) {
             if (fillerWordsCount > 0) {
+                keyboardButton.style.color = "white"; // light theme
                 keyboardButton.style.backgroundColor = "rgb(83, 141, 78)";
                 return "rgb(83, 141, 78)";
             } 
+            keyboardButton.style.color = "white"; // light theme
             keyboardButton.style.backgroundColor = "rgb(202, 114, 204)";  // Pink color is correct color for valentine's
             return "rgb(202, 114, 204)";                    // Pink color is correct color for valentine's
         }
 
+        keyboardButton.style.color = "white"; // light theme
         keyboardButton.style.backgroundColor = "rgb(181, 159, 59)";
         return "rgb(181, 159, 59)";
     }
@@ -105,7 +116,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const letterId = firstLetterId + index;
                 const letterEl = document.getElementById(letterId);
                 letterEl.classList.add("animate__flipInX");
-                letterEl.style = `background-color:${tileColor};border-color:"${tileColor}`;
+                letterEl.style = `background-color:${tileColor};border-color:${tileColor};color:white`; // light theme
+                // dark theme: letterEl.style = `background-color:${tileColor};border-color:"${tileColor}`;
 
             }, interval * index)
         });
@@ -114,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (currentWord === word) {   
             if (finalMessageCount != solutions.length) {
-                window.alert("Congratulations!");
+                window.alert("Congratulations! Would you like to wordle again?");
             } else {
                 window.alert("So, is that a yes? :D")                   // final message is for Valentine's day
             }                       
