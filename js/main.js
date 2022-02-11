@@ -1,11 +1,10 @@
-// TODO: implement words api to check word is real
-
 document.addEventListener("DOMContentLoaded", () => {
 
-    let solutions = ["i", "love", "you", "would", "you", "be", "my", "valentine"];           // EVERYTHING HAS TO BE LOWERCASE
+    // EVERYTHING in solutions HAS TO BE LOWERCASE
+    let solutions = ["maika", "would", "you", "be", "my", "valentine"];           
     let solutionCount = -1;
     let finalMessageCount = 0;                                                              // final message count is for valentine's day
-    let fillerWordsCount = 3;                                                               // filler words count is for valentine's day
+    let fillerWordsCount = 0;                                                               // filler words count is for valentine's day
     fillerWordsCount = fillerWordsCount + 1;                                                // fixing bug 
     let word;                                                               
     
@@ -36,11 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
             // Dark theme: button.item(i).style.backgroundColor = "rgb(129, 131, 132)";
         }
 
-        if (word.length >= 8) {
-            let game = document.getElementById("game");
-            game.style.maxWidth = "800px";
-        }
-
     }
 
     function getCurrentWordArr() {
@@ -66,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const keyboardButton = document.getElementById(letter);
         const isCorrectLetter = word.includes(letter);
+
 
         if (!isCorrectLetter) {
             keyboardButton.style.color = "white"; // light theme
@@ -101,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function handleSubmitWord() {
         const currentWordArr = getCurrentWordArr()
         if (currentWordArr.length!==word.length) {                    
-            window.alert("Word must be " + String(word.length) + " letters");  
+            window.alert("Word must be " + String(word.length) + " letters.");  
             return;                
         }
 
@@ -110,6 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const firstLetterId = guessedWordCount * word.length + 1;   
         const interval = 200;
         currentWordArr.forEach((letter, index) => {
+
             setTimeout(() => {
                 const tileColor = getTileColor(letter, index);
 
@@ -119,6 +115,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 letterEl.style = `background-color:${tileColor};border-color:${tileColor};color:white`; // light theme
                 // dark theme: letterEl.style = `background-color:${tileColor};border-color:"${tileColor}`;
 
+                
+                if (word.length >= 8) {
+                    letterEl.style= `background-color:${tileColor};border-color:${tileColor};color:white;min-width:45px;min-height:45px;font-size:20px;`
+                }
+                
+
             }, interval * index)
         });
 
@@ -126,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (currentWord === word) {   
             if (finalMessageCount != solutions.length) {
-                window.alert("Congratulations! Would you like to wordle again?");
+                window.alert("Good job! Would you like to wordle again?");
             } else {
                 window.alert("So, is that a yes? :D")                   // final message is for Valentine's day
             }                       
@@ -164,6 +166,13 @@ document.addEventListener("DOMContentLoaded", () => {
             square.classList.add("animate__animated");
             square.setAttribute("id", index + 1);
             gameBoard.appendChild(square);
+
+            if (word.length >= 8) {                      // since big words don't fit well on phone
+                square.style.minHeight = "45px";
+                square.style.minWidth = "45px";
+                square.style.fontSize = "20px";
+            }
+
         }
     }
 
