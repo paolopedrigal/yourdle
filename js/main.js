@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // EVERYTHING in solutions HAS TO BE LOWERCASE
-    let solutions = ["maika", "would", "you", "be", "my", "valentine"];           
+    let solutions = ["maika", "will", "you", "be", "my", "valentine"];           
     let solutionCount = -1;
     let finalMessageCount = 0;                                                              // final message count is for valentine's day
     let fillerWordsCount = 0;                                                               // filler words count is for valentine's day
