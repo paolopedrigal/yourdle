@@ -127,9 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
         guessedWordCount += 1;
 
         if (currentWord === word) {   
-            if (finalMessageCount != solutions.length) {
-                window.alert("Good job! Would you like to wordle again?");
-            } else {
+            if (finalMessageCount == solutions.length) {
                 window.alert("So, is that a yes? :D")                   // final message is for Valentine's day
             }                       
   
@@ -202,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         removeSquares();
                         getNewWord();
                         createSquares();
-                    }, 2500);
+                    }, 2000);
                 }
                 
                 return;
