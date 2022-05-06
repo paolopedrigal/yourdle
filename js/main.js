@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // EVERYTHING in solutions HAS TO BE LOWERCASE
-    let solutions = ["happy", "mothers", "day", "mom"];           
+    let solutions = ["happy", "mothers", "day", "mom"];       // Update: Changed for mother's day    
     let solutionCount = -1;
     let finalMessageCount = 0;                                                              // final message count is for valentine's day
-    let fillerWordsCount = 0;                                                               // filler words count is for valentine's day
+    let fillerWordsCount = 0;                                                                // filler words count is for valentine's day
     fillerWordsCount = fillerWordsCount + 1;                                                // fixing bug 
     let word;                                                               
     
@@ -84,8 +84,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 return "rgb(83, 141, 78)";
             } 
             keyboardButton.style.color = "white"; // light theme
-            keyboardButton.style.backgroundColor = "rgb(202, 114, 204)";  // Pink color is correct color for valentine's
-            return "rgb(202, 114, 204)";                    // Pink color is correct color for valentine's
+            keyboardButton.style.backgroundColor = "rgb(255, 0, 255)";  // Pink color is correct color for valentine's. Update: Changed for Mother's Day
+            return "rgb(255, 0, 255)";                    // Pink color is correct color for valentine's. Update: Changed for Mother's Day
         }
 
         keyboardButton.style.color = "white"; // light theme
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (currentWord === word) {   
             if (finalMessageCount == solutions.length) {
-                window.alert("So, is that a yes? :D")                   // final message is for Valentine's day
+                window.alert(":D")                   // final message is for Valentine's day
             }                       
   
             finished = true;
