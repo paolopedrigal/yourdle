@@ -127,8 +127,15 @@ document.addEventListener("DOMContentLoaded", () => {
         guessedWordCount += 1;
 
         if (currentWord === word) {   
+<<<<<<< HEAD
             if (finalMessageCount == solutions.length) {
                 window.alert(":D")                   // final message is for Valentine's day
+=======
+            if (finalMessageCount != solutions.length) {
+                window.alert("Good job! Would you like to wordle again?");
+            } else {
+                window.alert("So, is that a yes? :D")                   // final message is for Valentine's day
+>>>>>>> parent of 18f7e2a... Removed alert message when you complete round. Also, made restarting the round a bit faster.
             }                       
   
             finished = true;
@@ -200,7 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         removeSquares();
                         getNewWord();
                         createSquares();
-                    }, 2000);
+                    }, 2500);
                 }
                 
                 return;
