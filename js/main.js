@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // EVERYTHING in solutions HAS TO BE LOWERCASE
-    let solutions = ["happy", "mothers", "day", "mom"];       // Update: Changed for mother's day    
+    let solutions = ["maika", "will", "you", "be", "my", "valentine"];         
     let solutionCount = -1;
     let finalMessageCount = 0;                                                              // final message count is for valentine's day
     let fillerWordsCount = 0;                                                                // filler words count is for valentine's day
@@ -84,8 +84,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 return "rgb(83, 141, 78)";
             } 
             keyboardButton.style.color = "white"; // light theme
-            keyboardButton.style.backgroundColor = "rgb(255, 0, 255)";  // Pink color is correct color for valentine's. Update: Changed for Mother's Day
-            return "rgb(255, 0, 255)";                    // Pink color is correct color for valentine's. Update: Changed for Mother's Day
+            keyboardButton.style.backgroundColor = "rgb(255, 0, 255)";  
+            return "rgb(255, 0, 255)";                 
         }
 
         keyboardButton.style.color = "white"; // light theme
@@ -127,15 +127,10 @@ document.addEventListener("DOMContentLoaded", () => {
         guessedWordCount += 1;
 
         if (currentWord === word) {   
-<<<<<<< HEAD
-            if (finalMessageCount == solutions.length) {
-                window.alert(":D")                   // final message is for Valentine's day
-=======
             if (finalMessageCount != solutions.length) {
                 window.alert("Good job! Would you like to wordle again?");
             } else {
                 window.alert("So, is that a yes? :D")                   // final message is for Valentine's day
->>>>>>> parent of 18f7e2a... Removed alert message when you complete round. Also, made restarting the round a bit faster.
             }                       
   
             finished = true;
