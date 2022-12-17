@@ -1,0 +1,17 @@
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 5px;
+    gap: 5px;
+}
+
+.tile {
+    border: 2px solid rgb(211, 214, 218); /* dark theme: solid rgb(125, 125, 129);*/
+    min-width: 60px;
+    min-height: 60px;
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+    color: black; /* dark theme: gainsboro; */
+}
