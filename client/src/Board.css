@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     margin: 5px;
     gap: 5px;
 }
@@ -10,8 +11,12 @@
     border: 2px solid rgb(211, 214, 218); /* dark theme: solid rgb(125, 125, 129);*/
     min-width: 60px;
     min-height: 60px;
-    font-size: 35px;
+    font-size: 42px;
     font-weight: bold;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    text-transform: uppercase;
     color: black; /* dark theme: gainsboro; */
 }
