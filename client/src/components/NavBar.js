@@ -1,7 +1,7 @@
 import "./NavBar.css";
-import burgerMenu from "./images/burger.png";
-import questionMark from "./images/question-icon.jpg";
-import settings from "./images/settings-gear-icon.webp";
+import burgerMenu from "../images/burger.png";
+import questionMark from "../images/question-icon.jpg";
+import settings from "../images/settings-gear-icon.webp";
 
 function NavBar() {
 
@@ -19,4 +19,4 @@ function NavBar() {
     );
 }
 
-export { NavBar };
+export default NavBar;
