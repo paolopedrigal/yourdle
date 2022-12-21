@@ -4,19 +4,86 @@ import "./Board.css";
 
 function Board () {
 
-    const {keyPress} = useContext(GameContext);
+    const {keyPress, answers, setAnswers} = useContext(GameContext);
     const numRows = 6;
     const numTiles = 5;
     const ids = [...Array(numRows * numTiles).keys()].map((n) => 
         (n < 26) ? String.fromCharCode(97 + n) : String.fromCharCode(65 + (n - 26))
     );
     let idCount = 0;
+    const CURRENT_ANSWER = 0
+    const GREEN = "rgb(83, 141, 78)"; 
+    const DARK_GRAY = "rgb(129, 131, 132)";
+    const LIGHT_GRAY = "rgb(211, 214, 218)";
+    const YELLOW = "rgb(181, 159, 59)";
     const [guessLetter, setGuessLetter] = useState(0); // guessLetter points at current index of tile to guess on
     const [guessWordCount, setGuessWordCount] = useState(0); // guessWordCount keeps track of number of guessed words
+    const DELAY = 2000; // ms
 
     function incrementGuessLetter() { setGuessLetter(prevState => prevState + 1); } 
     function decrementGuessLetter() { setGuessLetter(prevState => prevState - 1); }
     function incrementGuessWordCount() { setGuessWordCount(prevState => prevState + 1); }
+    function updateAnswer() { setAnswers(prevState => prevState.slice(1, prevState.length)); }
+
+
+    function correctGuess() {
+        let guess = "";
+        for (let i = guessLetter-numTiles; i < guessLetter; i++) {
+            guess = guess.concat(document.getElementById(ids[i]).innerText);
+        }
+        return guess === answers[CURRENT_ANSWER];
+    }
+
+    function updateGuess() {
+        for (let i = guessLetter-numTiles; i < guessLetter; i++) {
+
+            let tile = document.getElementById(ids[i]);
+
+            // If letter is in the answer
+            if (answers[CURRENT_ANSWER].includes(tile.innerText)) {
+
+                // If letter is in same position as letter, background color is green
+                if (tile.innerText === answers[CURRENT_ANSWER][i%numTiles]) {
+                    tile.style.backgroundColor = GREEN;
+                    tile.style.borderColor = GREEN;
+                }
+                // Else, background color is yellow
+                else {
+                    tile.style.backgroundColor = YELLOW;
+                    tile.style.borderColor = YELLOW;
+                }
+            }
+            // Else, letter background color is gray
+            else {
+                tile.style.backgroundColor = DARK_GRAY;
+                tile.style.borderColor = DARK_GRAY;
+            }
+
+            // For all cases
+            tile.style.color = "white"; // letter font color becomes white
+
+        }
+    }
+
+    async function restartBoard() {
+        console.log("Restarting board.");
+        await new Promise(r => setTimeout(r, DELAY));
+        for (let i = 0; i < numRows * numTiles; i++) {
+            let tile = document.getElementById(ids[i]);
+            tile.innerText = "";
+            tile.style.color = "black";
+            tile.style.backgroundColor = "white";
+            tile.style.borderColor = LIGHT_GRAY;
+        }
+        setGuessLetter(0);
+        setGuessWordCount(0);
+    }
+
+    function stopGame() {
+        console.log("Game is stopped.");
+        setGuessLetter(100001); // Set guessLetter to a high value to prevent further guesses
+    }
+
 
     const handleKeyDown = (event) => {
 
@@ -39,7 +106,17 @@ function Board () {
         else if (event.key === "Enter" && (guessLetter % numTiles === 0) && guessLetter !== 0) { // Word is guessed, move to next row
             console.log("Word is guessed.");
             incrementGuessWordCount();
-        }      
+            updateGuess();
+            if (correctGuess()) {
+                updateAnswer();
+                if (answers.length === 1) {  // if current answer is last answer left
+                    stopGame();
+                }
+                else {
+                    restartBoard();
+                }
+            }    
+        }   
 
     }
 
@@ -75,6 +152,16 @@ function Board () {
         else if (keyPress.key === "Enter" && (guessLetter % numTiles === 0) && guessLetter !== 0) { // Word is guessed, move to next row
             console.log("Word is guessed.");
             incrementGuessWordCount();
+            updateGuess();
+            if (correctGuess()) {
+                updateAnswer();
+                if (answers.length === 1) {  // if current answer is last answer left
+                    stopGame();
+                }
+                else {
+                    restartBoard();
+                }
+            } 
         }
 
     }, [keyPress]);
@@ -89,6 +176,5 @@ function Board () {
         </div>
     );
 }
-
 
 export default Board;

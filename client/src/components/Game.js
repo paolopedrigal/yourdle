@@ -10,8 +10,10 @@ function Game() {
         pressCount: 0
     });
 
+    const [answers, setAnswers] = useState(["CRANE", "MAIKA"]); // TODO: get answers from user, MAKE SURE ANSWERS ARE ALL CAPITALIZED
+
     return(
-        <GameContext.Provider value={{keyPress, setKeyPress}}>
+        <GameContext.Provider value={{keyPress, setKeyPress, answers, setAnswers}}>
             <Board />
             <Keyboard />
         </GameContext.Provider>
