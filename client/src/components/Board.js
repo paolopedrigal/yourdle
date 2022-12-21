@@ -4,7 +4,7 @@ import "./Board.css";
 
 function Board () {
 
-    const {keyPress, answers, setAnswers} = useContext(GameContext);
+    const {keyPress, answers, setAnswers, setKeyboardUpdate} = useContext(GameContext);
     const numRows = 6;
     const numTiles = 5;
     const ids = [...Array(numRows * numTiles).keys()].map((n) => 
@@ -12,19 +12,19 @@ function Board () {
     );
     let idCount = 0;
     const CURRENT_ANSWER = 0
-    const GREEN = "rgb(83, 141, 78)"; 
+    const GREEN = "rgb(107,170,101)";
     const DARK_GRAY = "rgb(129, 131, 132)";
     const LIGHT_GRAY = "rgb(211, 214, 218)";
     const YELLOW = "rgb(181, 159, 59)";
     const [guessLetter, setGuessLetter] = useState(0); // guessLetter points at current index of tile to guess on
     const [guessWordCount, setGuessWordCount] = useState(0); // guessWordCount keeps track of number of guessed words
-    const DELAY = 2000; // ms
+    const DELAY = 2000; // mucroseconds
 
     function incrementGuessLetter() { setGuessLetter(prevState => prevState + 1); } 
     function decrementGuessLetter() { setGuessLetter(prevState => prevState - 1); }
     function incrementGuessWordCount() { setGuessWordCount(prevState => prevState + 1); }
     function updateAnswer() { setAnswers(prevState => prevState.slice(1, prevState.length)); }
-
+    function updateKeyboard(guessWord) { setKeyboardUpdate(prevState => ({update: prevState.update + 1, guess: guessWord})); }
 
     function correctGuess() {
         let guess = "";
@@ -35,6 +35,7 @@ function Board () {
     }
 
     function updateGuess() {
+        let guess = {};
         for (let i = guessLetter-numTiles; i < guessLetter; i++) {
 
             let tile = document.getElementById(ids[i]);
@@ -46,23 +47,26 @@ function Board () {
                 if (tile.innerText === answers[CURRENT_ANSWER][i%numTiles]) {
                     tile.style.backgroundColor = GREEN;
                     tile.style.borderColor = GREEN;
+                    guess[tile.innerText] = GREEN;
                 }
                 // Else, background color is yellow
                 else {
                     tile.style.backgroundColor = YELLOW;
                     tile.style.borderColor = YELLOW;
+                    guess[tile.innerText] = YELLOW;
                 }
             }
             // Else, letter background color is gray
             else {
                 tile.style.backgroundColor = DARK_GRAY;
                 tile.style.borderColor = DARK_GRAY;
+                guess[tile.innerText] = DARK_GRAY;
             }
 
             // For all cases
             tile.style.color = "white"; // letter font color becomes white
-
         }
+        updateKeyboard(guess);
     }
 
     async function restartBoard() {
