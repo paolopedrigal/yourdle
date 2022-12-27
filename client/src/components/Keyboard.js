@@ -1,4 +1,4 @@
-import { createRef, useContext, useEffect } from "react";
+import { createRef, useRef, useContext, useEffect, useState } from "react";
 import { GameContext } from "../contexts/GameContext";
 import "./Keyboard.css";
 
@@ -11,13 +11,16 @@ function Keyboard() {
     const refs = [...Array(keys1.length + keys2.length + keys3.length)].map(() => createRef(null));
     const LIGHT_GRAY = "rgb(211, 214, 218)";
     const DELAY = 2000; // microseconds
+    const firstUpdate = useRef(true);
     let refCount = 0;
+    const [isRestart, setIsRestart] = useState(false);
 
     function handleClick(keyVal) {
         setKeyPress(prevState => ({key: keyVal, pressCount: prevState.pressCount + 1}));
     }
 
     function updateKeyboard() {
+        console.log("Update");
         refs.forEach((ref) => {
             let key = ref.current;
             if (key.innerText in keyboardUpdate.guess) {
@@ -27,23 +30,32 @@ function Keyboard() {
         });
     }
 
-    async function restartKeyBoard() {
-        await new Promise(r => setTimeout(r, DELAY));
+    function restartKeyBoard() {
+        console.log("Restart");
         refs.forEach((ref) => {
             let key = ref.current;
-            key.style.backgroundColor = LIGHT_GRAY;
-            key.style.color = "black";
+            if (key) {
+                key.style.backgroundColor = LIGHT_GRAY;
+                key.style.color = "black";
+            }
         });
     }
 
     // Update keyboard after every guess
     useEffect(() => {
-        updateKeyboard();
+        if (!isRestart) updateKeyboard();
+        else setIsRestart(false);
     }, [keyboardUpdate]);
 
-    // Restart keyboard after correct guess
+    // Restart keyboard after correct guess occurs (answers array is updated)
     useEffect(() => {
-        if (answers != 0) restartKeyBoard(); // If answers == 0 (last answer is guessed), don't restart keyboard
+        if (answers.length >= 1) { 
+            restartKeyBoard(); 
+            if (!firstUpdate.current) { // Don't set isRestart to true in first render
+                setIsRestart(true);
+            }
+            firstUpdate.current = false; 
+        }
     }, [answers])
 
     return(
