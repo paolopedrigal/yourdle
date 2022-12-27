@@ -96,15 +96,20 @@ function Board () {
     }
 
     async function bounceRow() {
-        console.log("bounce");
-        await new Promise(r => setTimeout(r, PRE_BOUNCE_DELAY));
-        for (let i = guessLetter-numTiles; i < guessLetter; i++) {
+        await new Promise(r => setTimeout(r, PRE_BOUNCE_DELAY)); // wait for flipInX from updateGuess() to occur
+
+        // Remove flipInX from class list from all tiles prior to current guessLetter index
+        for (let i = 0; i < guessLetter; i++) {
             let tile = document.getElementById(ids[i]);
             tile.classList.remove("animate__flipInX");
+        }
+        // Add bounce animation to current row
+        for (let i = guessLetter-numTiles; i < guessLetter; i++) {
+            let tile = document.getElementById(ids[i]);
             tile.classList.add("animate__bounce");
             await new Promise(r => setTimeout(r, FLIP_BOUNCE_DELAY));
         }
-
+        // Remove bounce animation from current row for further rounds
         await new Promise(r => setTimeout(r, PRE_BOUNCE_DELAY));
         for (let i = guessLetter-numTiles; i < guessLetter; i++) {
             let tile = document.getElementById(ids[i]);
@@ -150,6 +155,7 @@ function Board () {
                 }
                 else {
                     restartBoard();
+                    console.log("Next round!");
                 }
             }    
         }   
@@ -191,12 +197,14 @@ function Board () {
             incrementGuessWordCount();
             updateGuess();
             if (correctGuess()) {
+                bounceRow();
                 updateAnswer();
                 if (answers.length === 1) {  // if current answer is last answer left
                     stopGame();
                 }
                 else {
                     restartBoard();
+                    console.log("Next round!");
                 }
             } 
         }

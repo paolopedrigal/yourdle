@@ -20,7 +20,6 @@ function Keyboard() {
     }
 
     function updateKeyboard() {
-        console.log("Update");
         refs.forEach((ref) => {
             let key = ref.current;
             if (key.innerText in keyboardUpdate.guess) {
@@ -31,7 +30,6 @@ function Keyboard() {
     }
 
     function restartKeyBoard() {
-        console.log("Restart");
         refs.forEach((ref) => {
             let key = ref.current;
             if (key) {
@@ -50,6 +48,7 @@ function Keyboard() {
     // Restart keyboard after correct guess occurs (answers array is updated)
     useEffect(() => {
         if (answers.length >= 1) { 
+            
             restartKeyBoard(); 
             if (!firstUpdate.current) { // Don't set isRestart to true in first render
                 setIsRestart(true);
