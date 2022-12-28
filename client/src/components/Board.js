@@ -15,6 +15,7 @@ function Board () {
     let idCount = 0; // used for initial render for initializing id's to html 
     const [guessLetter, setGuessLetter] = useState(0); // guessLetter points at current index of tile to guess on
     const [guessWordCount, setGuessWordCount] = useState(0); // guessWordCount keeps track of number of guessed words
+    const [isStopped, setIsStopped] = useState(false); // set to true when game is stopped
     const FLIP_BOUNCE_DELAY = 200; // microseconds
     const PRE_BOUNCE_DELAY = 1000; // microseconds
     const DELAY = 3000; // microseconds
@@ -23,15 +24,16 @@ function Board () {
     const LIGHT_GRAY = "rgb(211, 214, 218)"; // light gray color
     const YELLOW = "rgb(181, 159, 59)"; // yellow color
 
+    // useState callback function handlers
     function incrementGuessLetter() { setGuessLetter(prevState => prevState + 1); } 
     function decrementGuessLetter() { setGuessLetter(prevState => prevState - 1); }
     function incrementGuessWordCount() { setGuessWordCount(prevState => prevState + 1); }
+    function stopGame() { setIsStopped(true); }
     function updateKeyboard(guessWord) { setKeyboardUpdate(prevState => ({update: prevState.update + 1, guess: guessWord})); }
     function updateAnswer() { 
         setPrevAnswer(answers[CURRENT_ANSWER]);
         setAnswers(prevState => prevState.slice(1, prevState.length)); 
     }
-
 
     function correctGuess() {
         let guess = "";
@@ -117,16 +119,13 @@ function Board () {
         }
     }
 
-
-    function stopGame() {
-        console.log("Game is stopped.");
-        setGuessLetter(100001); // Set guessLetter to a high value to prevent further guesses
-    }
-
-
     const handleKeyDown = (event) => {
+        // When game is stopped, further guesses are prevented
+        if (isStopped) {
+            console.log("Game is stopped.");
+        }
         // Deleting guessed letter
-        if (event.key === "Backspace" && (guessLetter >= (guessWordCount * numTiles))) {
+        else if (event.key === "Backspace" && (guessLetter >= (guessWordCount * numTiles))) {
 
             if (guessLetter !== (guessWordCount * numTiles)) { 
                 document.getElementById(ids[guessLetter - 1]).innerText = "" ; 
@@ -174,11 +173,18 @@ function Board () {
 
     // When user uses virtual keyboard
     useEffect(() => {
-
+        // When game is stopped, further guesses are prevented
+        if (isStopped) {
+            console.log("Game is stopped.");
+        }
         // Deleting guessed letter
-        if (keyPress.key === "⌫" && (guessLetter >= (guessWordCount * numTiles))) { 
+        else if (keyPress.key === "⌫" && (guessLetter >= (guessWordCount * numTiles))) { 
 
             if (guessLetter !== (guessWordCount * numTiles)) { 
+                console.log(ids.length);
+                console.log(guessLetter - 1);
+                console.log(document.getElementById(ids[guessLetter - 1]));
+
                 document.getElementById(ids[guessLetter - 1]).innerText = "" ; 
                 document.getElementById(ids[guessLetter - 1]).style.borderColor = "rgb(211, 214, 218)"; // light grey
 
