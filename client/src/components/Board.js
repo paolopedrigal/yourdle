@@ -6,10 +6,10 @@ function Board () {
 
     const {keyPress, answers, setAnswers, setKeyboardUpdate} = useContext(GameContext);
     const numRows = 6; // number of guesses in the game
-    const CURRENT_ANSWER = 0 // used for indexing answers array
-    const [prevAnswer, setPrevAnswer] = useState("");
-    const numTiles = (answers.length > 0) ? answers[CURRENT_ANSWER].length : prevAnswer.length;  // number of tiles is equivalent to the current word length
-    const ids = [...Array(numRows * numTiles).keys()].map((n) => 
+    const CURRENT_ANSWER = 0; // used for indexing answers array
+    const NUMBER_IDS = 54; // lowercase and uppercase alphabet
+    const [numTiles, setNumTiles] = useState((answers[CURRENT_ANSWER]) ? answers[CURRENT_ANSWER].length : 0);
+    const ids = [...Array(NUMBER_IDS).keys()].map((n) => 
         (n < 26) ? String.fromCharCode(97 + n) : String.fromCharCode(65 + (n - 26))
     ); // array of ids of tiles
     let idCount = 0; // used for initial render for initializing id's to html 
@@ -17,7 +17,7 @@ function Board () {
     const [guessWordCount, setGuessWordCount] = useState(0); // guessWordCount keeps track of number of guessed words
     const [isStopped, setIsStopped] = useState(false); // set to true when game is stopped
     const FLIP_BOUNCE_DELAY = 200; // microseconds
-    const PRE_BOUNCE_DELAY = 1000; // microseconds
+    const PRE_BOUNCE_DELAY = 200 * numTiles; // microseconds
     const DELAY = 3000; // microseconds
     const GREEN = "rgb(107,170,101)"; // green color
     const DARK_GRAY = "rgb(129, 131, 132)"; // dark gray color
@@ -30,11 +30,14 @@ function Board () {
     function incrementGuessWordCount() { setGuessWordCount(prevState => prevState + 1); }
     function stopGame() { setIsStopped(true); }
     function updateKeyboard(guessWord) { setKeyboardUpdate(prevState => ({update: prevState.update + 1, guess: guessWord})); }
-    function updateAnswer() { 
-        setPrevAnswer(answers[CURRENT_ANSWER]);
-        setAnswers(prevState => prevState.slice(1, prevState.length)); 
+    function updateAnswer() { setAnswers(prevState => prevState.slice(1, prevState.length)); }
+    function updateTiles() {
+        // Delay code from running because of async function updateGuess 
+        setTimeout(() => {
+            setNumTiles((answers[CURRENT_ANSWER+1]) ? answers[CURRENT_ANSWER+1].length : answers[CURRENT_ANSWER].length);
+        }, DELAY)
     }
-
+    
     function correctGuess() {
         let guess = "";
         for (let i = guessLetter-numTiles; i < guessLetter; i++) {
@@ -76,25 +79,28 @@ function Board () {
 
             // For all cases
             tile.style.color = "white"; // letter font color becomes white
-            await new Promise(r => setTimeout(r, FLIP_BOUNCE_DELAY));
+
+            // Using await to  temporarily "block" following code from running
+            await new Promise(r => setTimeout(r, FLIP_BOUNCE_DELAY)); 
 
         }
         updateKeyboard(guess); // update keyboard with corresponding colors
     }
 
-    async function restartBoard() {
-        await new Promise(r => setTimeout(r, DELAY)); // delay before restarting
-
-        // change each tile to an empty tile
-        for (let i = 0; i < numRows * numTiles; i++) {
-            let tile = document.getElementById(ids[i]);
-            tile.innerText = "";
-            tile.style.color = "black";
-            tile.style.backgroundColor = "white";
-            tile.style.borderColor = LIGHT_GRAY;
-        }
-        setGuessLetter(0); // point to first tile in board (at index 0)
-        setGuessWordCount(0); // restart to zero guesses
+    function restartBoard() {
+        // Delay code from running to wait for async updateGuess function to resolve
+        setTimeout(() => {     
+            // change each tile to an empty tile
+            for (let i = 0; i < numRows * numTiles; i++) {
+                let tile = document.getElementById(ids[i]);
+                if (tile.innerText) tile.innerText = ""; 
+                tile.style.color = "black";
+                tile.style.backgroundColor = "white";
+                tile.style.borderColor = LIGHT_GRAY;
+            }
+            setGuessLetter(0); // point to first tile in board (at index 0)
+            setGuessWordCount(0); // restart to zero guesses
+        }, DELAY);
     }
 
     async function bounceRow() {
@@ -149,7 +155,8 @@ function Board () {
             if (correctGuess()) {
                 bounceRow();
                 updateAnswer();
-                if (answers.length === 1) {  // if current answer is last answer left
+                updateTiles();
+                if (answers.length === 1) {  // if current answer is last answer remaining
                     stopGame();
                 }
                 else {
@@ -181,10 +188,6 @@ function Board () {
         else if (keyPress.key === "⌫" && (guessLetter >= (guessWordCount * numTiles))) { 
 
             if (guessLetter !== (guessWordCount * numTiles)) { 
-                console.log(ids.length);
-                console.log(guessLetter - 1);
-                console.log(document.getElementById(ids[guessLetter - 1]));
-
                 document.getElementById(ids[guessLetter - 1]).innerText = "" ; 
                 document.getElementById(ids[guessLetter - 1]).style.borderColor = "rgb(211, 214, 218)"; // light grey
 
@@ -205,7 +208,8 @@ function Board () {
             if (correctGuess()) {
                 bounceRow();
                 updateAnswer();
-                if (answers.length === 1) {  // if current answer is last answer left
+                updateTiles();
+                if (answers.length === 1) {  // if current answer is last answer remaining
                     stopGame();
                 }
                 else {

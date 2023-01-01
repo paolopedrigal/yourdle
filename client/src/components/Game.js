@@ -9,7 +9,7 @@ function Game() {
         key: "",
         pressCount: 0
     });
-    const [answers, setAnswers] = useState(["CRANE", "MAIKA"]); // TODO: get answers from user, MAKE SURE ANSWERS ARE ALL CAPITALIZED
+    const [answers, setAnswers] = useState(["MAIKA", "WILL", "YOU", "BE", "MY", "VALENTINE"]); // TODO: get answers from user, MAKE SURE ANSWERS ARE ALL CAPITALIZED
     const [keyboardUpdate, setKeyboardUpdate] = useState({
         update: 0,
         guess: {}
