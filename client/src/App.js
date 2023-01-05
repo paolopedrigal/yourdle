@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./routes/Home.js";
-import Wordle from "./routes/Wordle.js";
+import Yourdle from "./routes/Yourdle.js";
 
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route exact path="/" element={<Home />} />
-                <Route exact path="/wordle" element={<Wordle />} />
+                <Route exact path="/wordle" element={<Yourdle />} />
             </Routes>
         </BrowserRouter>
     );

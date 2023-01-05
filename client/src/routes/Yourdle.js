@@ -1,7 +1,7 @@
 import NavBar from "../components/NavBar.js";
 import Game from "../components/Game.js";
 
-function Wordle() {
+function Yourdle() {
     return (
         <div>
             <NavBar />
@@ -10,4 +10,4 @@ function Wordle() {
     );
 }
 
-export default Wordle;
+export default Yourdle;

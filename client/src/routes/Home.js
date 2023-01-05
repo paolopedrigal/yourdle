@@ -1,8 +1,9 @@
+import Credentials from "../components/Credentials.js";
 
 function Home() {
     return (
         <div>
-            Home
+            <Credentials />
         </div>
     );
 }

@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { GameContext } from "../contexts/GameContext";
 import "./Board.css";
 
-function Board () {
+function Board() {
 
     const {keyPress, answers, setAnswers, setKeyboardUpdate} = useContext(GameContext);
     const numRows = 6; // number of guesses in the game

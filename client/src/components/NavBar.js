@@ -10,7 +10,7 @@ function NavBar() {
             <div className="more-info">
                 <img src={burgerMenu} alt="More Info" className="burger-menu"/>
             </div>
-            <h1 className="wordle-title">WORDLE</h1>
+            <h1 className="yourdle-title">YOURDLE</h1>
             <div className="options">
                 <img src={questionMark} alt="Help" className="question-mark"/>
                 <img src={settings} alt="Settings" className="settings"/>
