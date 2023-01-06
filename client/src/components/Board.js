@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { GameContext } from "../contexts/GameContext";
+import { GameContext } from "../contexts/GameContext.js";
 import "./Board.css";
 
 function Board() {

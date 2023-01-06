@@ -1,7 +1,8 @@
+import InputAnswer from "../components/InputAnswer";
 
 function CreateYourdle() {
     return (
-        <div></div>
+        <InputAnswer />
     );
 }
 

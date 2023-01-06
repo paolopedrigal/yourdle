@@ -1,10 +1,12 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
+import { HomeContext } from "../contexts/HomeContext.js";
 import "./Credentials.css";
 
-function Credentials(props) {
+function Credentials() {
 
     const nameRef = useRef(null);
     const invalidCredentialsRef = useRef(null);
+    const {create, setCreate} = useContext(HomeContext);
     const codeRef = useRef(null);
     const MAXLENGTH_NAME = 10; // 10 characters maximum for username
     const MAXLENGTH_CODE = 5; // 5 characters maximum length for code
@@ -14,6 +16,11 @@ function Credentials(props) {
         console.log("username:", nameRef.current.value);
         console.log("code:", codeRef.current.value);
         checkInvalidCredentials();
+    }
+
+    const toggleForm = () => {
+        console.log("toggle form clicked");
+        setCreate(prevState => !prevState);
     }
 
     function checkInvalidCredentials() { 
@@ -40,16 +47,17 @@ function Credentials(props) {
     return(
         <form className="form-container">
             <div className="input-container">
-                {props.create ? <label>USERNAME</label> : <label>NAME</label>}
-                <input type="text" maxLength={`${MAXLENGTH_NAME}`} placeholder={props.create ? "Enter username" : "Enter name"}ref={nameRef}></input>  
+                {create ? <label>USERNAME</label> : <label>NAME</label>}
+                <input type="text" maxLength={`${MAXLENGTH_NAME}`} placeholder={create ? "Enter username" : "Enter name"}ref={nameRef}></input>  
             </div>
             <div className="input-container">
                 <label>CODE</label>
                 <input type="password" maxLength={`${MAXLENGTH_CODE}`} placeholder={`${MAXLENGTH_CODE}-character code`} ref={codeRef}></input>
             </div>
-            <button type="button" className="button-submit" onClick={submit}>{props.create ? "Create YOURDLE!" : "View YOURDLE!"}</button>
+            <button type="button" className="button-submit" onClick={submit}>{create ? "Create YOURDLE!" : "View YOURDLE!"}</button>
             <small>(YOURDLE = YOUR + WORDLE)</small>
             <p className="invalid-credentials" ref={invalidCredentialsRef}>Please type a valid username/code.</p>
+            <p className="toggle-form" onClick={toggleForm}>{create ? "View Yourdle →" : "Create Yourdle →"}</p>
         </form>
     );
 }
