@@ -2,7 +2,11 @@ import InputAnswer from "../components/InputAnswer";
 
 function CreateYourdle() {
     return (
-        <InputAnswer />
+        <div>
+            <InputAnswer />
+            <InputAnswer />
+        </div>
+
     );
 }
 

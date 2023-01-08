@@ -48,11 +48,11 @@ function Credentials() {
         <form className="form-container">
             <div className="input-container">
                 {create ? <label>USERNAME</label> : <label>NAME</label>}
-                <input type="text" maxLength={`${MAXLENGTH_NAME}`} placeholder={create ? "Enter username" : "Enter name"}ref={nameRef}></input>  
+                <input type="text" maxLength={`${MAXLENGTH_NAME}`} placeholder={create ? "Create username" : "Enter name"}ref={nameRef}></input>  
             </div>
             <div className="input-container">
                 <label>CODE</label>
-                <input type="password" maxLength={`${MAXLENGTH_CODE}`} placeholder={`${MAXLENGTH_CODE}-character code`} ref={codeRef}></input>
+                <input type="password" maxLength={`${MAXLENGTH_CODE}`} placeholder={create ? "Create code" : "Enter code"} ref={codeRef}></input>
             </div>
             <button type="button" className="button-submit" onClick={submit}>{create ? "Create YOURDLE!" : "View YOURDLE!"}</button>
             <small>(YOURDLE = YOUR + WORDLE)</small>
