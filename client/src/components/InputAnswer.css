@@ -6,15 +6,10 @@
     border: 1px solid lightslategray;
     border-radius: 0px 0px 20px 20px;
     border-top: none;
-    width: 625px;
+    border-left: none;
+    border-right: none;
+    /* width: 598px; */
     padding: 15px;
-}
-
-.toggle-num-tiles {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
 }
 
 .enter-answer-container {
@@ -35,13 +30,13 @@
 }
 
 .refresh {
-    width: 7%;
-    height: auto;
+    width: 50px;
+    height: 50px;
 }
 
 .save {
-    width: 6%;
-    height: auto;
+    width: 42px;
+    height: 42px;
 }
 
 .row {
@@ -67,3 +62,20 @@
     color: black; /* dark theme: gainsboro; */
 }
 
+.saved {
+    color: transparent;
+    background-color: transparent;
+    border: 2px solid transparent;
+    position: fixed;
+    bottom: 0;
+    font-family: monospace;
+    font-size: 30px;
+    padding: 5px;
+    transition: 0.4s;
+}
+
+.saved.active {
+    background-color: white;
+    color: mediumslateblue;
+    border-color: mediumslateblue;
+}

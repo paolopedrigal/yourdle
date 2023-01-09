@@ -1,17 +1,21 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef, useContext } from "react";
+import { AnswersContext } from "../contexts/AnswersContext";
 import "./InputAnswer.css";
 import refresh from "../images/refresh.png";
 import save from "../images/save.png";
 
-function InputAnswer() {
+function InputAnswer(props) {
 
     const answerRef = useRef(null);
     const rowRef = useRef(null);
+    const savedRef = useRef(null);
     const [answer, setAnswer] = useState(["", "", "", "", ""]);
+    const { setAnswers } = useContext(AnswersContext);
     const MAX_TILES = 8;
     const MIN_TILES = 3;
     const GREEN = "rgb(107,170,101)"; // green color
     const LIGHT_GRAY = "rgb(211, 214, 218)"; // light gray color
+    const DELAY = 3000; // 1 second
     let tileCount = 0;
 
     const handleRefresh = () => {
@@ -32,9 +36,12 @@ function InputAnswer() {
             child.style.borderColor = LIGHT_GRAY;
             child.style.color = "black";
         }
+
     }
 
     const handleSave = () => {
+
+        // Iterate through each tile to save answer. Change tiles to green.
         let answerSaved = "";
         for (let i = 0; i < rowRef.current.children.length; i++) {
             const child = rowRef.current.children[i];
@@ -45,6 +52,29 @@ function InputAnswer() {
                 answerSaved = answerSaved.concat(child.innerText);
             }
         }
+
+        if (answerSaved != "") {
+
+            // Remove "Saved" notification from screen
+            savedRef.current.classList.add("active"); 
+            setTimeout(() => savedRef.current.classList.remove("active"), DELAY);
+
+            // "Return" saved answer to AnswersContext
+            setAnswers((prevState) => {
+                let newAnswers = [...Array(prevState.length)];
+                for (let i=0; i<prevState.length; i++) {
+                    if (i == props.answerIndex) {
+                        newAnswers[i] = answerSaved;
+                    }
+                    else {
+                        newAnswers[i] = prevState[i];
+                    }
+                }
+                return newAnswers;
+            })
+
+        }
+
         console.log("Saving:", answerSaved);
     }
 
@@ -58,6 +88,7 @@ function InputAnswer() {
             <div className="row" ref={rowRef}>
                 { answer.map((letter) => <div className="tile" id={`${tileCount++}`}>{letter}</div>)}
             </div>
+            <p className="saved" ref={savedRef}>Saved</p>
         </div>
     );
 }

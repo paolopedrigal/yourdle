@@ -1,0 +1,37 @@
+.answers-container {
+    padding-bottom: 30px;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.answers-button {
+    margin: 20px;
+    border-radius: 100%;
+    font-size: 25px;
+    width: 35px;
+    height: 35px;
+    color: white;
+    background-color: darkcyan;
+    border: none;
+}
+
+.answers-button.inactive {
+    color: ivory;
+    background-color: azure;
+}
+
+.next {
+    font-size: 2rem;
+    font-family: monospace;
+    font-weight: 500;
+    color: olive;
+    background-color: transparent;
+    border: none;
+    cursor: pointer; 
+}
