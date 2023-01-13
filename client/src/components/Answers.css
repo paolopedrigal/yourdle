@@ -1,5 +1,19 @@
 .answers-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.answers-container.finished {
+    justify-items: center;
+    align-items: center;
+}
+
+.input-answers-container {
     padding-bottom: 30px;
+}
+
+.input-answers-container.blur {
+    filter: blur(5px);
 }
 
 .buttons-container {
@@ -26,7 +40,7 @@
     background-color: azure;
 }
 
-.next {
+.finish-button {
     font-size: 2rem;
     font-family: monospace;
     font-weight: 500;
@@ -34,4 +48,10 @@
     background-color: transparent;
     border: none;
     cursor: pointer; 
+}
+
+.confirm-finish-box {
+    z-index: 1000;
+    position: fixed;
+    top: 25%;
 }

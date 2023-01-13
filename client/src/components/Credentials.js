@@ -9,7 +9,7 @@ function Credentials() {
     const {create, setCreate} = useContext(HomeContext);
     const codeRef = useRef(null);
     const MAXLENGTH_NAME = 10; // 10 characters maximum for username
-    const MAXLENGTH_CODE = 5; // 5 characters maximum length for code
+    const MAXLENGTH_CODE = 8; // 5 characters maximum length for code
     const ONE_SECOND = 1000; // 1 second;
 
     const submit = () => { 

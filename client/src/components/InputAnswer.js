@@ -10,31 +10,49 @@ function InputAnswer(props) {
     const rowRef = useRef(null);
     const savedRef = useRef(null);
     const [answer, setAnswer] = useState(["", "", "", "", ""]);
-    const { setAnswers } = useContext(AnswersContext);
+    const { setAnswers, loadFinish } = useContext(AnswersContext);
     const MAX_TILES = 8;
     const MIN_TILES = 3;
     const GREEN = "rgb(107,170,101)"; // green color
     const LIGHT_GRAY = "rgb(211, 214, 218)"; // light gray color
-    const DELAY = 3000; // 1 second
+    const DELAY = 3000; // 3 second
     let tileCount = 0;
 
     const handleRefresh = () => {
 
-        // Update answer state
-        let answerArr = [];
-        if (answerRef.current.value.length >= MIN_TILES) {
-            for (let i = 0; i < answerRef.current.value.length; i++) {
-                answerArr.push(answerRef.current.value.charAt(i).toUpperCase());
+        if (!loadFinish) {
+            // Update answer state
+            let answerArr = [];
+            const answerVal = answerRef.current.value;
+            const regex = /[a-zA-z]*/;
+            if (answerVal.length >= MIN_TILES && answerVal.match(regex) == answerVal) {
+                for (let i = 0; i < answerVal.length; i++) {
+                    answerArr.push(answerVal.charAt(i).toUpperCase());
+                }
+                setAnswer(answerArr);
             }
-            setAnswer(answerArr);
-        }
 
-        // Use default color of tiles
-        for (let i = 0; i < rowRef.current.children.length; i++) {
-            const child = rowRef.current.children[i];
-            child.style.backgroundColor = "white";
-            child.style.borderColor = LIGHT_GRAY;
-            child.style.color = "black";
+            // Use default color of tiles
+            for (let i = 0; i < rowRef.current.children.length; i++) {
+                const child = rowRef.current.children[i];
+                child.style.backgroundColor = "white";
+                child.style.borderColor = LIGHT_GRAY;
+                child.style.color = "black";
+            }
+
+            // Reset saved answers back to unsaved
+            setAnswers((prevState) => {
+                let newAnswers = [...Array(prevState.length)];
+                for (let i=0; i<prevState.length; i++) {
+                    if (i == props.answerIndex) {
+                        newAnswers[i] = "";
+                    }
+                    else {
+                        newAnswers[i] = prevState[i];
+                    }
+                }
+                return newAnswers;
+            })
         }
 
     }
@@ -56,8 +74,10 @@ function InputAnswer(props) {
         if (answerSaved != "") {
 
             // Remove "Saved" notification from screen
-            savedRef.current.classList.add("active"); 
-            setTimeout(() => savedRef.current.classList.remove("active"), DELAY);
+            if (!loadFinish) {
+                savedRef.current.classList.add("active"); 
+                setTimeout(() => savedRef.current.classList.remove("active"), DELAY);
+            }
 
             // "Return" saved answer to AnswersContext
             setAnswers((prevState) => {
