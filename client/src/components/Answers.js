@@ -44,9 +44,6 @@ function Answers() {
             </AnswersContext.Provider>
         </div>
 
-
-
-
     );
 }
 

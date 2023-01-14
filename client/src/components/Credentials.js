@@ -1,4 +1,5 @@
-import { useRef, useContext } from "react";
+import { useRef, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { HomeContext } from "../contexts/HomeContext.js";
 import "./Credentials.css";
 
@@ -8,6 +9,7 @@ function Credentials() {
     const invalidCredentialsRef = useRef(null);
     const {create, setCreate} = useContext(HomeContext);
     const codeRef = useRef(null);
+    const navigate = useNavigate();
     const MAXLENGTH_NAME = 10; // 10 characters maximum for username
     const MAXLENGTH_CODE = 8; // 5 characters maximum length for code
     const ONE_SECOND = 1000; // 1 second;
@@ -15,7 +17,15 @@ function Credentials() {
     const submit = () => { 
         console.log("username:", nameRef.current.value);
         console.log("code:", codeRef.current.value);
-        checkInvalidCredentials();
+        const isInvalid = checkInvalidCredentials();
+        if (!isInvalid) {
+            if (create) {
+                navigate("/create-yourdle/" + nameRef.current.value);
+            }
+            else {
+                navigate("/yourdle/" + codeRef.current.value)
+            }
+        }
     }
 
     const toggleForm = () => {
@@ -37,10 +47,13 @@ function Credentials() {
                 nameRef.current.classList.remove("animate__animated", "animate__shakeY");
             }, ONE_SECOND);
         }
-        invalidCredentialsRef.current.classList.add("show"); 
-        setTimeout(() => {
-            invalidCredentialsRef.current.classList.remove("show"); 
-        }, ONE_SECOND * 4);
+        if (!(codeRef.current.value) || !(nameRef.current.value)) {
+            invalidCredentialsRef.current.classList.add("show"); 
+            setTimeout(() => {
+                invalidCredentialsRef.current.classList.remove("show"); 
+            }, ONE_SECOND * 4);
+        }
+        return !(codeRef.current.value) || !(nameRef.current.value)
 
     }
 
