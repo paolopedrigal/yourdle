@@ -1,11 +1,16 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AnswersContext } from "../contexts/AnswersContext";
 import "./Finish.css";
 
 function Finish() {
 
     const { setIsFinished, setLoadFinish } = useContext(AnswersContext);
-    const handleYes = () => { setIsFinished(true); }
+    const navigate = useNavigate();
+    const handleYes = () => { 
+        setIsFinished(true);
+        setLoadFinish(true);
+    }
     const handleNotYet = () => { 
         setIsFinished(false);  
         setLoadFinish(false);
@@ -18,6 +23,7 @@ function Finish() {
             <button className="confirm-finish-button" id="yes" onClick={handleYes}>Yes</button>
             <button className="confirm-finish-button" onClick={handleNotYet}>Not yet</button> 
            </div>
+           
         </div>
     );
 }

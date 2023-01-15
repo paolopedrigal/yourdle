@@ -10,7 +10,7 @@ SHOW search_path; -- Check if current schema is "wordle"
 
 CREATE TABLE Users (
     username VARCHAR(10) NOT NULL, -- username has max characters of 10
-    code VARCHAR(5) NOT NULL, -- code has max characters of 5
+    code VARCHAR(8) NOT NULL, -- code has max characters of 5
 
     link TEXT, -- url link of wordle
     time_created TIMESTAMP, -- time created of url

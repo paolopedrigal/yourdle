@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { AnswersContext } from "../contexts/AnswersContext.js";
 import InputAnswer from "./InputAnswer.js";
 import Finish from "./Finish.js"
@@ -13,10 +14,11 @@ function Answers() {
     const [answers, setAnswers] = useState([...Array(MAX_NUM_ANSWERS)].map(() => ""));
     const [loadFinish, setLoadFinish] = useState(false);
     const [isFinished, setIsFinished] = useState(false);
+    const navigate = useNavigate();
     const decrementAnswers = () => { if (numAnswers > MIN_NUM_ANSWERS) setNumAnswers(prevState => prevState-1); }
     const incrementAnswers = () => { if (numAnswers < MAX_NUM_ANSWERS) setNumAnswers(prevState => prevState+1); }
     const handleFinish = () => { if (removeEmpty(answers).length !== 0) setLoadFinish(true); }
-    
+    const DELAY = 1000; // 1 second
     let answerIndex = 0;
 
     useEffect(() => {
@@ -24,7 +26,12 @@ function Answers() {
         if (cleanAnswers.length >= 1) { // if there are at least one non-empty answers
             console.log("Creating a YOURDLE on", new Date());
             console.log("Saving", cleanAnswers);
+
+            setTimeout(() => {
+                navigate("/");
+            }, DELAY);
         }
+
     }, [isFinished])
 
     return (

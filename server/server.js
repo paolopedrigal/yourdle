@@ -1,8 +1,17 @@
 require("dotenv").config();
 const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const db = require("./database/index.js");
 const app = express();
 const port = process.env.PORT; // get port number from .env file
+
+// Configure body-parser middleware
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+// Configure cors middleware
+app.use(cors());
 
 // Listening to server on port
 app.listen(port, () => {
@@ -10,33 +19,42 @@ app.listen(port, () => {
 });
 
 // CREATE a user
-app.post("/api/createUser/", async (req, res) => {
+app.post("/api/create-user/", async (req, res) => {
     
-    const username = req["body"]["username"];
-    const code = req["body"]["code"];
-    const user = await db.query("INSERT INTO Users (username, code) VALUES ($1, $2) RETURNING *;", [username, code]);
+    try {
+        const username = req.body.username;
+        const code = req.body.code;
+        const createUser = await db.query("INSERT INTO Users (username, code) VALUES ($1, $2) RETURNING *;", [username, code]);
+    } catch(error) {
+        console.log(error);
+    }
 
     return res.status(201).json({
-        "status": "success",
-        "data": user["rows"][0]
+        status: "success",
+        data: req.body
     });
 });
 
-// RETRIEVE a user
-app.get("/api/getUser/", async (req, res) => {
+// RETRIEVE a code
+app.get("/api/get-username/", async (req, res) => {
 
-    const username = req["query"]["username"];
-    const code = req["query"]["code"];
+    const username = req.query.username;
+    const code = req.query.code;
     const results = await db.query("SELECT username, code FROM Users WHERE username=$1 AND code=$2", [username, code]);
 
     return res.status(200).json({
         "status": "success",
-        "data": results["rows"]
+        "data": results.rows
     });
 });
 
-// CREATE answers of a given user
-app.get("/api/createWordle/:username:code", (req, res) => {
+// RETRIEVE answers of a given user
+// app.get("/api/get-answers/", async (req, res) => {
+//     return res.sta
+// })
+
+// UPDATE answers of a given user
+app.put("/api/create-yourdle/:username", (req, res) => {
 
     const username = req["query"]["username"];
     const code = req["query"]["code"];

@@ -1,6 +1,7 @@
-import { useRef, useContext, useState } from "react";
+import { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { HomeContext } from "../contexts/HomeContext.js";
+import Fetch from "../apis/Fetch.js";
 import "./Credentials.css";
 
 function Credentials() {
@@ -14,16 +15,29 @@ function Credentials() {
     const MAXLENGTH_CODE = 8; // 5 characters maximum length for code
     const ONE_SECOND = 1000; // 1 second;
 
+    async function createUserDB(username, code) {
+        try {
+            const response = await Fetch.post("/create-user/", {
+                username: username,
+                code: code
+            })
+        }
+        catch(error) {
+            console.log(error);
+        }
+    }
+
     const submit = () => { 
         console.log("username:", nameRef.current.value);
         console.log("code:", codeRef.current.value);
         const isInvalid = checkInvalidCredentials();
         if (!isInvalid) {
             if (create) {
+                createUserDB(nameRef.current.value, codeRef.current.value);
                 navigate("/create-yourdle/" + nameRef.current.value);
             }
             else {
-                navigate("/yourdle/" + codeRef.current.value)
+                navigate("/yourdle/" + codeRef.current.value);
             }
         }
     }
