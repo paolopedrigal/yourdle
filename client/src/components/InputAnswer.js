@@ -1,4 +1,4 @@
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import { AnswersContext } from "../contexts/AnswersContext";
 import "./InputAnswer.css";
 import refresh from "../images/refresh.png";
@@ -6,6 +6,7 @@ import save from "../images/save.png";
 
 function InputAnswer(props) {
 
+    const inputAnswerRef = useRef(null);
     const answerRef = useRef(null);
     const rowRef = useRef(null);
     const savedRef = useRef(null);
@@ -96,8 +97,16 @@ function InputAnswer(props) {
         }
     }
 
+    useEffect(() => {
+        inputAnswerRef.current.addEventListener("keydown", (event) => {
+            if (event.key == "Enter") handleRefresh();
+        });
+    }, [inputAnswerRef])
+    
+
+
     return(
-        <div className="input-answer-container">
+        <div className="input-answer-container" ref={inputAnswerRef}>
             <div className="enter-answer-container">
                 <input type="text" minLength={`${MIN_TILES}`} maxLength={`${MAX_TILES}`} placeholder="Enter answer..." className="enter-answer" ref={answerRef}></input>
                 <input type="image" src={refresh} alt="Refresh" className="refresh" onClick={handleRefresh}></input>
