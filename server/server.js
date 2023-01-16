@@ -20,32 +20,36 @@ app.listen(port, () => {
 
 // CREATE a user
 app.post("/api/create-user/", async (req, res) => {
-    
     try {
         const username = req.body.username;
         const code = req.body.code;
         const createUser = await db.query("INSERT INTO Users (username, code) VALUES ($1, $2) RETURNING *;", [username, code]);
+
+        return res.status(201).json({
+            status: "success",
+            data: req.body
+        });
+
     } catch(error) {
         console.log(error);
     }
-
-    return res.status(201).json({
-        status: "success",
-        data: req.body
-    });
 });
 
-// RETRIEVE a code
-app.get("/api/get-username/", async (req, res) => {
-
-    const username = req.query.username;
-    const code = req.query.code;
-    const results = await db.query("SELECT username, code FROM Users WHERE username=$1 AND code=$2", [username, code]);
-
-    return res.status(200).json({
-        "status": "success",
-        "data": results.rows
-    });
+// RETRIEVE a username or code
+app.get("/api/get-user/", async (req, res) => {
+    try {
+        console.log(req.query);
+        console.log(req.params);
+        const username = req.query.username;
+        const code = req.query.code;
+        const results = await db.query("SELECT username, code FROM Users WHERE username=$1 OR code=$2", [username, code]);
+        res.status(200).json({
+            "status": "success",
+            "data": results.rows
+        });
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 // RETRIEVE answers of a given user
