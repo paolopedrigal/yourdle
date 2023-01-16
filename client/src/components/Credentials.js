@@ -25,10 +25,8 @@ function Credentials() {
 
         // If valid credentials
         if (!isInvalid) {
-
             // If creating a yourdle
             if (create) {
-
                 // Check if the user already exists with same username or code in the database
                 getUserRequest(name, code).then((results) => { 
                     if (Object.keys(results.data.data).length >= 1) { // If a username/code is taken
@@ -39,7 +37,6 @@ function Credentials() {
                     }
                 })
             }
-
             // Else, viewing a yourdle
             else {
                 navigate("/yourdle/" + code);
@@ -48,18 +45,19 @@ function Credentials() {
         else {
             displayInvalidMessage("Please type a valid username/code.")
         }
+
     }
 
     async function getUserRequest(username, code) {
         try {
             // Send request to get users that have the username OR code
-            const response = await Fetch.get("/get-user/", {
+            const results = await Fetch.get("/get-user/", {
                 params: {
                     username: username,
                     code: code
                 }
             });
-            return response;
+            return results;
         }
         catch(error) {
             console.log(error);
@@ -69,7 +67,7 @@ function Credentials() {
     async function createUserRequest(username, code) {
         try {
             // Send a request to create a new user in the USERS table in the database
-            const response = await Fetch.post("/create-user/", {
+            const results = await Fetch.post("/create-user/", {
                 username: username,
                 code: code
             })
@@ -106,7 +104,7 @@ function Credentials() {
                 nameRef.current.classList.remove("animate__animated", "animate__shakeY");
             }, ONE_SECOND);
         }
-        return !(codeRef.current.value) || !(nameRef.current.value)
+        return !(codeRef.current.value) || !(nameRef.current.value);
     }
 
     return(

@@ -19,6 +19,7 @@ CREATE TABLE Users (
     answer1 VARCHAR(9), -- mandatory to provide at least one answer for wordle
     answer2 VARCHAR(9),
     answer3 VARCHAR(9),
+    answer4 VARCHAR(9),
     answer5 VARCHAR(9),
 
     PRIMARY KEY(username, code) -- primary key is username AND code

@@ -94,8 +94,6 @@ function InputAnswer(props) {
             })
 
         }
-
-        console.log("Saving:", answerSaved);
     }
 
     return(

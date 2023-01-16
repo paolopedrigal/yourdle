@@ -25,6 +25,19 @@
     border: none;
 }
 
+.invalid-finish {
+    font-size: 1.2rem;
+    color: transparent;
+    font-weight: lighter;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    transition: all 1s;
+    text-align: center;
+}
+
+.invalid-finish.show {
+    color: darkred;
+}
+
 #yes {
     background-color: dodgerblue;
     color: white;
