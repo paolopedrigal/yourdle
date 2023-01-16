@@ -40,7 +40,7 @@ function Answers() {
 
                     // If the user already has answers
                     if (results.data.data[0].answer1 != null) {
-                        setInvalidFinish({isInvalid: true, invalidMessage: "Cannot update existings answers."});
+                        setInvalidFinish({isInvalid: true, invalidMessage: "Cannot update existing answers."});
                     }
                     // Otherwise, add the answers for the user in the database
                     else {
@@ -49,7 +49,7 @@ function Answers() {
                 }
                 // Otherwise, the user does not exist in the database
                 else {
-                    setInvalidFinish({isInvalid: true, invalidMessage: "User does not exist."})
+                    setInvalidFinish({isInvalid: true, invalidMessage: "This user does not exist."})
                 }
             })
         }

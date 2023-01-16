@@ -49,6 +49,7 @@ app.get("/api/get-user/", async (req, res) => {
     }
 });
 
+// Check if answers exists (by seeing if first answer is input) when given a username
 app.get("/api/check-answers/:username", async (req, res) => {
     try{
         const username = req.query.username;
@@ -62,17 +63,15 @@ app.get("/api/check-answers/:username", async (req, res) => {
     }
 })
 
-// RETRIEVE answers of a given user
-app.get("/api/get-answers/:username", async (req, res) => {
+// RETRIEVE answers of a given code
+app.get("/api/get-answers/:code", async (req, res) => {
     try {
-        const username = req.query.username;
-        const answer1 = req.query.answer1;
-        const answer2 = req.query.answer2;
-        const answer3 = req.query.answer3;
-        const answer4 = req.query.answer4;
-        const answer5 = req.query.answer5;
-        
-        // const results = await db.query("SELECT *")
+        const code = req.query.code;
+        const results = await db.query("SELECT answer1, answer2, answer3, answer4, answer5 FROM Users WHERE code=$1", [code]);
+        res.status(201).json({
+            "status": "success",
+            "data": results.rows
+        })
     } catch (error) {
         console.log(error);
     }

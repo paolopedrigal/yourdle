@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { GameContext } from "../contexts/GameContext.js";
 import "./Board.css";
+import removeEmpty from "../utils/utils.js";
 
 function Board() {
 
@@ -156,7 +157,7 @@ function Board() {
                 bounceRow();
                 updateAnswer();
                 updateTiles();
-                if (answers.length === 1) {  // if current answer is last answer remaining
+                if (removeEmpty(answers).length == 1) {  // if current answer is last answer remaining
                     stopGame();
                 }
                 else {
@@ -166,6 +167,14 @@ function Board() {
             }    
         }   
     }
+
+    // After first render, change the number of tiles to the true number of tiles after connecting to database
+    // TODO: Clean this up later on when time allows
+    useEffect(() => {
+        if (numTiles == 0 && answers[CURRENT_ANSWER]) {
+            setNumTiles(answers[CURRENT_ANSWER].length);
+        } 
+    }, [answers])
 
     // When user uses physical keyboard
     useEffect(() => {
@@ -209,7 +218,7 @@ function Board() {
                 bounceRow();
                 updateAnswer();
                 updateTiles();
-                if (answers.length === 1) {  // if current answer is last answer remaining
+                if (removeEmpty(answers).length == 1) {  // if current answer is last answer remaining
                     stopGame();
                 }
                 else {
