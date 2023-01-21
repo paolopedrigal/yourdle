@@ -12,9 +12,6 @@ CREATE TABLE Users (
     username VARCHAR(10) NOT NULL, -- username has max characters of 10
     code VARCHAR(8) NOT NULL, -- code has max characters of 5
 
-    link TEXT, -- url link of wordle
-    time_created TIMESTAMP, -- time created of url
-
     -- all answers have max characters of 9
     answer1 VARCHAR(9), -- mandatory to provide at least one answer for wordle
     answer2 VARCHAR(9),

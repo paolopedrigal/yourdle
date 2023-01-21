@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./database/index.js");
+const cron = require("node-cron");
 const app = express();
 const port = process.env.PORT; // get port number from .env file
 
@@ -86,12 +87,11 @@ app.put("/api/create-yourdle/:username", async (req, res) => {
         const answer3 = req.body.answer3;
         const answer4 = req.body.answer4;
         const answer5 = req.body.answer5;
-        const timeCreated = req.body.time_created;
         const results = await db.query("UPDATE Users " +
-            "SET answer1=$1, answer2=$2, answer3=$3, answer4=$4, answer5=$5, time_created=$6 " + 
-            "WHERE username=$7 " +
+            "SET answer1=$1, answer2=$2, answer3=$3, answer4=$4, answer5=$5 " + 
+            "WHERE username=$6 " +
             "RETURNING *;", 
-        [answer1, answer2, answer3, answer4, answer5, timeCreated, username]);
+        [answer1, answer2, answer3, answer4, answer5, username]);
 
         res.status(201).json({
             "status": "success",
@@ -103,13 +103,15 @@ app.put("/api/create-yourdle/:username", async (req, res) => {
     }
 });
 
-// DELETE a user
-app.delete("/api/deleteUser/", (req, res) => {
+// DELETE all users from table that is not admin
+async function deleteAllUsers() {
+    const results = await db.query("DELETE FROM Users WHERE username is NOT NULL OR username != 'admin';");
+    return results;
+}
 
-    return res.status(204).json({
-        "status": "success"
+// Schedule deleteAllUsers after every midnight
+cron.schedule("0 0 * * * ", () => {
+    deleteAllUsers().then(() => {
+        console.log("Deleted all users after midnight");
     })
-})
-
-
-
+});

@@ -80,7 +80,6 @@ function Answers() {
                 answer3: (answersArr.length >= 1) ? answersArr.shift() : "",
                 answer4: (answersArr.length >= 1) ? answersArr.shift() : "",
                 answer5: (answersArr.length >= 1) ? answersArr.shift() : "",
-                time_created: new Date(Date.now()).toISOString()
             });
             // Return to home page after 1 second
             setTimeout(() => {

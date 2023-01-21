@@ -33,8 +33,7 @@ function Credentials() {
             if (create) {
                 // Check if the user already exists with same username or code in the database
                 getUserRequest(name, code).then((results) => { 
-                    console.log(results.data.data);
-                    if (Object.keys(results.data.data).length == 1) { // If a username/code is taken
+                    if (results.data.data.length >= 1) { // If a username/code is taken
                         displayInvalidMessage("The username or code is already taken.")
                     }
                     else { // Otherwise, create a new user

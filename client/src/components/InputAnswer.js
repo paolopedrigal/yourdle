@@ -72,9 +72,9 @@ function InputAnswer(props) {
             }
         }
 
-        if (answerSaved != "") {
+        if (answerSaved != "" && (answerRef.current.value.toUpperCase() == answerSaved)) {
 
-            // Remove "Saved" notification from screen
+            // Show "Saved" notification from screen
             if (!loadFinish) {
                 savedRef.current.classList.add("active"); 
                 setTimeout(() => savedRef.current.classList.remove("active"), DELAY);
