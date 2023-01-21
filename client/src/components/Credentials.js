@@ -45,7 +45,7 @@ function Credentials() {
             else {
                 // Check if code exists within in the database
                 getUserRequest("", code).then((results) => {
-                    if (results.data.data[0].code == code) { // If the code is found, then navigate to yourdle page
+                    if (results.data.data.length == 1) { // If the code is found, then navigate to yourdle page
                         navigate("/yourdle/" + code);
                     }
                     else { // Otherwise, the code is incorrect
