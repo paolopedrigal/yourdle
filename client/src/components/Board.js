@@ -171,23 +171,23 @@ function Board() {
     }
 
     // After first render, change the number of tiles to the true number of tiles after connecting to database
-    // TODO: Clean this up later on when time allows
     useEffect(() => {
-        if (numTiles == 0 && answers[CURRENT_ANSWER]) {
-            setNumTiles(answers[CURRENT_ANSWER].length);
-        } 
+
+        // If the number of tiles is 0, connect to true number of tiles from database when "answers" is updated
+        if (numTiles == 0 && answers[CURRENT_ANSWER]) setNumTiles(answers[CURRENT_ANSWER].length);
+        
     }, [answers])
 
     // When user uses physical keyboard
     useEffect(() => {
 
-        document.addEventListener("keydown", handleKeyDown);
+        if (numTiles != 0) document.addEventListener("keydown", handleKeyDown);
 
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
         }
 
-    }, [guessLetter, guessWordCount]);
+    }, [numTiles, guessLetter, guessWordCount]);
 
     // When user uses virtual keyboard
     useEffect(() => {
