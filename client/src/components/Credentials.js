@@ -9,8 +9,12 @@ function Credentials() {
     const nameRef = useRef(null);
     const invalidCredentialsRef = useRef(null);
     const {create, setCreate} = useContext(HomeContext);
-    const toggleForm = () => { setCreate(prevState => !prevState); }
-    const [takenCredentials, setTakenCredentials] = useState(false);
+    const audio = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/clickUp.mp3')
+    const toggleForm = () => { 
+        setCreate(prevState => !prevState); 
+        audio.play();
+
+    }
     const codeRef = useRef(null);
     const navigate = useNavigate();
     const MAXLENGTH_NAME = 10; // 10 characters maximum for username
@@ -29,17 +33,26 @@ function Credentials() {
             if (create) {
                 // Check if the user already exists with same username or code in the database
                 getUserRequest(name, code).then((results) => { 
-                    if (Object.keys(results.data.data).length >= 1) { // If a username/code is taken
+                    console.log(results.data.data);
+                    if (Object.keys(results.data.data).length == 1) { // If a username/code is taken
                         displayInvalidMessage("The username or code is already taken.")
                     }
                     else { // Otherwise, create a new user
                         createUserRequest(name, code); 
                     }
-                })
+                });
             }
             // Else, viewing a yourdle
             else {
-                navigate("/yourdle/" + code);
+                // Check if code exists within in the database
+                getUserRequest("", code).then((results) => {
+                    if (results.data.data[0].code == code) { // If the code is found, then navigate to yourdle page
+                        navigate("/yourdle/" + code);
+                    }
+                    else { // Otherwise, the code is incorrect
+                        displayInvalidMessage("Please enter a valid code.");
+                    }
+                });
             }
         }
         else {

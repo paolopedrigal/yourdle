@@ -11,7 +11,7 @@ function Game() {
         key: "",
         pressCount: 0
     });
-    const [answers, setAnswers] = useState([]); // TODO: get answers from user, MAKE SURE ANSWERS ARE ALL CAPITALIZED
+    const [answers, setAnswers] = useState([]); 
     const [keyboardUpdate, setKeyboardUpdate] = useState({
         update: 0,
         guess: {}

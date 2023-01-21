@@ -14,10 +14,10 @@ function NavBar() {
                 <img src={burgerMenu} alt="More Info" className="burger-menu"/>
             </div>
             <h1 className="yourdle-title" onClick={() => navigate("/")}>YOURDLE</h1>
-            <div className="options">
+            {/* <div className="options">
                 <img src={questionMark} alt="Help" className="question-mark"/>
                 <img src={settings} alt="Settings" className="settings"/>
-            </div>
+            </div> */}
         </nav>
     );
 }
