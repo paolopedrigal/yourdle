@@ -14,12 +14,13 @@ function Board() {
         (n < 26) ? String.fromCharCode(97 + n) : String.fromCharCode(65 + (n - 26))
     ); // array of ids of tiles
     let idCount = 0; // used for initial render for initializing id's to html 
+
     const [guessLetter, setGuessLetter] = useState(0); // guessLetter points at current index of tile to guess on
     const [guessWordCount, setGuessWordCount] = useState(0); // guessWordCount keeps track of number of guessed words
     const [isStopped, setIsStopped] = useState(false); // set to true when game is stopped
     const FLIP_BOUNCE_DELAY = 200; // microseconds
-    const PRE_BOUNCE_DELAY = 200 * numTiles; // microseconds
-    const DELAY = 3000; // microseconds
+    const PRE_BOUNCE_DELAY = 300 * numTiles; // microseconds
+    const DELAY = 800 * numTiles; // microseconds
     const GREEN = "rgb(107,170,101)"; // green color
     const DARK_GRAY = "rgb(129, 131, 132)"; // dark gray color
     const LIGHT_GRAY = "rgb(211, 214, 218)"; // light gray color
@@ -98,6 +99,7 @@ function Board() {
                 tile.style.color = "black";
                 tile.style.backgroundColor = "white";
                 tile.style.borderColor = LIGHT_GRAY;
+                tile.classList.remove("animate__animated", "animate__bounce", "animate__flipInX");
             }
             setGuessLetter(0); // point to first tile in board (at index 0)
             setGuessWordCount(0); // restart to zero guesses
