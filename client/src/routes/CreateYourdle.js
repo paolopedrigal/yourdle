@@ -5,7 +5,7 @@ function CreateYourdle() {
 
     return (
         <div>
-            <NavBar />
+            <NavBar moreInfo={false}/>
             <Answers />
         </div>
 

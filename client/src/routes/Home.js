@@ -9,7 +9,7 @@ function Home() {
 
     return (
         <HomeContext.Provider value={{create, setCreate}}>
-            <NavBar />
+            <NavBar moreInfo={false}/>
             <Credentials />
         </HomeContext.Provider>
     );

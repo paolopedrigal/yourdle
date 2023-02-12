@@ -4,7 +4,7 @@ import Game from "../components/Game.js";
 function Yourdle() {
     return (
         <div>
-            <NavBar />
+            <NavBar moreInfo={true}/>
             <Game />
         </div>
     );
