@@ -105,7 +105,7 @@ app.put("/api/create-yourdle/:username", async (req, res) => {
 
 // DELETE all users from table that is not admin
 async function deleteAllUsers() {
-    const results = await db.query("DELETE FROM Users WHERE username is NOT NULL OR username != 'admin';");
+    const results = await db.query("DELETE FROM Users WHERE username is NOT NULL AND username != 'admin';");
     return results;
 }
 
