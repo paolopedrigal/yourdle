@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { GameContext } from "../contexts/GameContext.js";
 import "./Board.css";
-import removeEmpty from "../utils/utils.js";
+import { removeEmpty } from "../utils/utils.js";
 
 function Board() {
 

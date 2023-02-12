@@ -4,7 +4,7 @@ import { AnswersContext } from "../contexts/AnswersContext.js";
 import Fetch from "../apis/Fetch.js";
 import InputAnswer from "./InputAnswer.js";
 import Finish from "./Finish.js"
-import removeEmpty from "../utils/utils.js";
+import { removeEmpty } from "../utils/utils.js";
 import "./Answers.css";
 
 function Answers() {

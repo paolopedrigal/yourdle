@@ -12,7 +12,7 @@ function InputAnswer(props) {
     const savedRef = useRef(null);
     const [answer, setAnswer] = useState(["", "", "", "", ""]);
     const { setAnswers, loadFinish } = useContext(AnswersContext);
-    const MAX_TILES = 8;
+    const MAX_TILES = 7;
     const MIN_TILES = 3;
     const GREEN = "rgb(107,170,101)"; // green color
     const LIGHT_GRAY = "rgb(211, 214, 218)"; // light gray color

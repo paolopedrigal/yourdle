@@ -15,6 +15,12 @@ nav {
     width: 50px;
 }
 
+.more-info-container {
+    position: absolute;
+    left: 0;
+    z-index: 1000;
+}
+
 .burger-menu {
     width: 50%;
     height: auto;

@@ -22,8 +22,8 @@
     font-size: 1rem;
     color: black; /*dark theme: rgb(215, 218, 220);*/
     padding: 0;
-    height: 75px;
-    width: 50px;
+    height: 60px;
+    width: 42px;
     cursor: pointer;
     /* flex-grow: 1; */
     flex-shrink: 0;
