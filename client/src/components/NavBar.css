@@ -21,6 +21,16 @@ nav {
     z-index: 1000;
 }
 
+.help-info-container {
+    position: absolute;
+    z-index: 1000;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
 .burger-menu {
     width: 50%;
     height: auto;
@@ -43,6 +53,7 @@ nav {
     width: 10%;
     justify-content: right;
     gap: 10px;
+    margin-right: 10px;
 }
 
 .question-mark {
@@ -51,5 +62,4 @@ nav {
 
 .settings {
     width: 35px;
-    margin-right: 10px;
 }
