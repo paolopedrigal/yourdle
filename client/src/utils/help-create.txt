@@ -1,0 +1,7 @@
+# How to Create a YOURDLE
+• Enter an answer, then press the refresh button or enter.
+• Save the answer by clicking the checkmark button.
+• To add more answers, click the plus sign button.
+• To have less answers, click the minus sign button.
+• Submit the answers by clicking on "Finish".
+NOTE: Answers will be deleted by the end of the day. Also, answers cannot be edited once submitted. 

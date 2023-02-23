@@ -1,0 +1,10 @@
+# View a YOURDLE
+1. Enter your name in the NAME field.
+2. Enter the code sent to you by your friend.
+3. Click on "View YOURDLE!" and have fun!
+
+# Create a YOURDLE
+1. Enter a unique username in the USERNAME field.
+2. Enter a unique code in the CODE field.
+3. Click on "Click YOURDLE!" 
+NOTE: Usernames/codes will be deleted at the end of the day.

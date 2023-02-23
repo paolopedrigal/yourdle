@@ -1,0 +1,7 @@
+# How to Play
+• Guess what the correct word is by using the keyboard.
+• Yellow means correct letter out of position.
+• Green means correct letter in position.
+• Gray means incorrect letter.
+• The game is finished when the board does not reset.
+• Refresh the page to play again.

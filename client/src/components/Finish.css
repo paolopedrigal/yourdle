@@ -1,0 +1,44 @@
+.finish-container {
+    background-color: white;
+    padding: 15px;
+    border: 2px solid lightgray;
+    border-radius: 20px;
+}
+
+.confirm-finish-prompt {
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.confirm-finish-button {
+    font-size: 25px;
+    font-family: monospace;
+    border-radius: 25px;
+    padding: 10px;  
+    border: none;
+}
+
+.invalid-finish {
+    font-size: 1.2rem;
+    color: transparent;
+    font-weight: lighter;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    transition: all 1s;
+    text-align: center;
+}
+
+.invalid-finish.show {
+    color: darkred;
+}
+
+#yes {
+    background-color: dodgerblue;
+    color: white;
+}

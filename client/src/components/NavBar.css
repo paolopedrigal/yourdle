@@ -1,0 +1,65 @@
+nav {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid rgb(211, 214, 218);
+    align-items: center;
+    justify-content: center;
+    padding: 1vw 0;
+    margin-bottom: 10px;
+}
+
+.more-info {
+    position: absolute;
+    left: 0;
+    width: auto;
+    width: 50px;
+}
+
+.more-info-container {
+    position: absolute;
+    left: 0;
+    z-index: 1000;
+}
+
+.help-info-container {
+    position: absolute;
+    z-index: 1000;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.burger-menu {
+    width: 50%;
+    height: auto;
+    margin: 15px;
+}
+
+.yourdle-title {
+    color: black;
+    font-size: 3rem;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    margin: 0;
+}
+
+.options {
+    position: absolute;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    width: 10%;
+    justify-content: right;
+    gap: 10px;
+    margin-right: 10px;
+}
+
+.question-mark {
+    width: 35px;   
+}
+
+.settings {
+    width: 35px;
+}
