@@ -2,8 +2,6 @@ import "./Help.css";
 
 function Help(props) {
 
-    console.log(props.text.split("\n"));
-
     return(
         <div className="help-container">
             {props.text.split("\n").map(t => {

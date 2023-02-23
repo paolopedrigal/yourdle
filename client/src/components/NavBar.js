@@ -18,18 +18,16 @@ function NavBar(props) {
     return (
         <div>
             <nav>
-                {props.moreInfo ? 
-                    <div className="more-info">
-                        <img src={burgerMenu} alt="More Info" onClick={handleInfoClicked} className="burger-menu"/>
-                    </div> : <></>
-                }
+                <div className="more-info">
+                    <img src={burgerMenu} alt="More Info" onClick={handleInfoClicked} className="burger-menu"/>
+                </div> 
                 <h1 className="yourdle-title" onClick={() => navigate("/")}>YOURDLE</h1>
                 <div className="options">
                     <img src={questionMark} alt="Help" onClick={handleHelpClicked} className="question-mark"/>
                     {/* <img src={settings} alt="Settings" className="settings"/> */}
                 </div>
             </nav>
-            {isMoreInfoClicked ? <div className="more-info-container"><MoreInfo /></div> : <></>}
+            {isMoreInfoClicked ? <div className="more-info-container"><MoreInfo toShare={props.moreInfo}/></div> : <></>}
             {isHelpClicked ? <div className="help-info-container"><Help text={props.helpText} /></div> : <></>}
         </div>
 
