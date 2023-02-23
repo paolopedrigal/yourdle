@@ -1,3 +1,4 @@
-# wordle
+# YOURDLE
 
-Visit: https://paolopedrigal.github.io/wordle
+Wordle, but on creative mode.
+
