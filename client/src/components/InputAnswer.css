@@ -1,81 +1,108 @@
 .input-answer-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid lightslategray;
-    border-radius: 0px 0px 20px 20px;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    /* width: 598px; */
-    padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid lightslategray;
+  border-radius: 0px 0px 20px 20px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding: 15px;
 }
 
 .enter-answer-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 10px;
 }
 
 .enter-answer {
-    width: 17rem;
+  width: 13rem;
 }
 
 .enter-answer:invalid {
-    background-color: maroon;
+  background-color: maroon;
 }
 
 .refresh {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
 
 .save {
-    width: 42px;
-    height: 42px;
+  width: 42px;
+  height: 42px;
 }
 
 .row {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
-
-.tile {
-    border: 2px solid rgb(211, 214, 218); /* dark theme: solid rgb(125, 125, 129);*/
-    min-width: 60px;
-    min-height: 60px;
-    font-size: 42px;
-    font-weight: 600;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    text-transform: uppercase;
-    color: black; /* dark theme: gainsboro; */
+.answer-tile {
+  border: 2px solid rgb(211, 214, 218); /* dark theme: solid rgb(125, 125, 129);*/
+  min-width: 60px;
+  min-height: 60px;
+  font-size: 42px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  text-transform: uppercase;
+  color: black; /* dark theme: gainsboro; */
 }
 
 .saved {
-    color: transparent;
-    background-color: transparent;
-    border: 2px solid transparent;
-    position: fixed;
-    bottom: 0;
-    font-family: monospace;
-    font-size: 30px;
-    padding: 5px;
-    transition: 0.4s;
+  color: transparent;
+  background-color: transparent;
+  border: 2px solid transparent;
+  position: fixed;
+  bottom: 0;
+  font-family: monospace;
+  font-size: 30px;
+  padding: 5px;
+  transition: 0.4s;
 }
 
 .saved.active {
-    background-color: white;
-    color: mediumslateblue;
-    border-color: mediumslateblue;
+  background-color: white;
+  color: mediumslateblue;
+  border-color: mediumslateblue;
+}
+
+/* Mobile devices */
+@media only screen and (max-device-width: 600px) {
+  .enter-answer {
+    width: 17rem;
+    height: 4rem;
+  }
+
+  .refresh {
+    width: 80px;
+    height: 80px;
+  }
+
+  .save {
+    width: 70px;
+    height: 70px;
+  }
+
+  .row {
+    gap: 100px;
+  }
+
+  .answer-tile {
+    width: 125px;
+    height: 125px;
+    margin: 0px 2px;
+    font-size: 80px;
+  }
 }
