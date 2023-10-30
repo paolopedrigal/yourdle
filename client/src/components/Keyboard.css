@@ -1,40 +1,50 @@
 .keyboard-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .keyboard-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .keyboard-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(211, 214, 218); /* dark theme: rgb(129, 131, 132) */
-    font-family: inherit;
-    font-weight: bolder;
-    font-size: 1rem;
-    color: black; /*dark theme: rgb(215, 218, 220);*/
-    padding: 0;
-    height: 60px;
-    width: 42px;
-    cursor: pointer;
-    /* flex-grow: 1; */
-    flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(211, 214, 218); /* dark theme: rgb(129, 131, 132) */
+  font-family: inherit;
+  font-weight: bolder;
+  font-size: 1rem;
+  color: black; /*dark theme: rgb(215, 218, 220);*/
+  padding: 0;
+  height: 60px;
+  width: 42px;
+  cursor: pointer;
+  /* flex-grow: 1; */
+  flex-shrink: 0;
 
-    text-transform: uppercase;
-    margin: 3px;
-    border-radius: 8px;
-    user-select: none;
+  text-transform: uppercase;
+  margin: 3px;
+  border-radius: 8px;
+  user-select: none;
 }
 
-#Enter, #⌫ {
-    flex-grow: 1.5;
+#Enter,
+#⌫ {
+  flex-grow: 1.5;
 }
 
+/* Mobile devices */
+@media only screen and (max-device-width: 600px) {
+  .keyboard-button {
+    font-size: 35px;
+    width: 92px;
+    height: 190px;
+    border-radius: 20px;
+  }
+}

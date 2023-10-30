@@ -1,4 +1,4 @@
-import { useRef, useContext, useState } from "react";
+import { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { HomeContext } from "../contexts/HomeContext.js";
 import Fetch from "../apis/Fetch.js";
@@ -22,7 +22,7 @@ function Credentials() {
   const ONE_SECOND = 1000; // 1 second;
 
   const submit = () => {
-    const name = nameRef.current.value;
+    const name = create ? nameRef.current.value : null;
     const code = codeRef.current.value;
     const isInvalid = checkInvalidCredentials(); // Check if credentials are invalid (unfilled)
 
@@ -45,7 +45,9 @@ function Credentials() {
       else {
         // Check if code exists within in the database
         getUserRequest("", code).then((results) => {
-          if (results.data.data.length == 1) {
+          console.log(results); // TODO: delete this
+
+          if (results.data.data.length === 1) {
             // If the code is found, then navigate to yourdle page
             navigate("/yourdle/" + code);
           } else {
@@ -98,8 +100,9 @@ function Credentials() {
   }
 
   function checkInvalidCredentials() {
-    // Shake (user)name field if empty
+    // Shake (user)code field if empty
     if (!codeRef.current.value) {
+      console.log("no code??"); // TODO: delete this
       codeRef.current.classList.add("animate__animated", "animate__shakeY");
       setTimeout(() => {
         codeRef.current.classList.remove(
@@ -108,8 +111,8 @@ function Credentials() {
         );
       }, ONE_SECOND);
     }
-    // Shake code field if empty
-    if (!nameRef.current.value) {
+    // Shake name field if empty
+    if (create && !nameRef.current.value) {
       nameRef.current.classList.add("animate__animated", "animate__shakeY");
       invalidCredentialsRef.current.classList.add("show");
       setTimeout(() => {
@@ -119,24 +122,32 @@ function Credentials() {
         );
       }, ONE_SECOND);
     }
-    return !codeRef.current.value || !nameRef.current.value;
+
+    // Return boolean if is credentials are invalid
+    return create
+      ? !codeRef.current.value || !nameRef.current.value
+      : !codeRef.current.value;
   }
 
   return (
     <form className="form-container">
       <div className="input-container">
-        {create ? <label>USERNAME</label> : <label>NAME</label>}
-        <input
-          type="text"
-          maxLength={`${MAXLENGTH_NAME}`}
-          placeholder={create ? "Create username" : "Enter name"}
-          ref={nameRef}
-        ></input>
+        {create ? <label>USERNAME</label> : <></>}
+        {create ? (
+          <input
+            type="text"
+            maxLength={`${MAXLENGTH_NAME}`}
+            placeholder={create ? "Create username" : "Enter name"}
+            ref={nameRef}
+          ></input>
+        ) : (
+          <></>
+        )}
       </div>
       <div className="input-container">
         <label>CODE</label>
         <input
-          type="password"
+          type="text"
           maxLength={`${MAXLENGTH_CODE}`}
           placeholder={create ? "Create code" : "Enter code"}
           ref={codeRef}

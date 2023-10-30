@@ -1,6 +1,7 @@
 # How to Create a YOURDLE
-• Enter an answer, then press the refresh button or enter.
+• Enter an answer in the "Enter..." field, then press the Enter/Return Key.
 • Save the answer by clicking the checkmark button.
+• To unsave an answer, click the refresh button. The refresh button also puts entered answers inside the tiles.
 • To add more answers, click the plus sign button.
 • To have less answers, click the minus sign button.
 • Submit the answers by clicking on "Finish".

@@ -25,6 +25,20 @@ textarea {
 /* Mobile Devices */
 @media only screen and (max-device-width: 600px) {
   .more-info-info {
-    font-size: 32px;
+    font-size: 40px;
+    width: 60%;
+  }
+
+  textarea {
+    font-size: 40px;
+    width: 600px;
+    height: 100px;
+  }
+
+  .material-icons {
+    width: 70px;
+    height: 70px;
+    font-size: 45px;
+    text-align: center;
   }
 }

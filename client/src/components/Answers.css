@@ -25,6 +25,7 @@
 }
 
 .answers-button {
+  padding: 0;
   margin: 20px;
   border-radius: 100%;
   font-size: 25px;
@@ -33,6 +34,7 @@
   color: white;
   background-color: darkcyan;
   border: none;
+  text-align: center;
 }
 
 .answers-button.inactive {
@@ -44,7 +46,7 @@
   font-size: 2rem;
   font-family: monospace;
   font-weight: 500;
-  color: olive;
+  color: #d3d3d3; /* light gray */
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -58,4 +60,13 @@
 
 /* Mobile devices */
 @media only screen and (max-device-width: 600px) {
+  .answers-button {
+    width: 60px;
+    height: 60px;
+    font-size: 40px;
+  }
+
+  .finish-button {
+    font-size: 4rem;
+  }
 }

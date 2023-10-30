@@ -105,4 +105,8 @@
     margin: 0px 2px;
     font-size: 80px;
   }
+
+  .saved {
+    font-size: 60px;
+  }
 }

@@ -26,7 +26,7 @@ function InputAnswer(props) {
       const regex = /[a-zA-z]*/;
       if (
         answerVal.length >= MIN_TILES &&
-        answerVal.match(regex) == answerVal
+        answerVal.match(regex) === answerVal
       ) {
         for (let i = 0; i < answerVal.length; i++) {
           answerArr.push(answerVal.charAt(i).toUpperCase());
@@ -44,14 +44,8 @@ function InputAnswer(props) {
 
       // Reset saved answers back to unsaved
       setAnswers((prevState) => {
-        let newAnswers = [...Array(prevState.length)];
-        for (let i = 0; i < prevState.length; i++) {
-          if (i == props.answerIndex) {
-            newAnswers[i] = "";
-          } else {
-            newAnswers[i] = prevState[i];
-          }
-        }
+        let newAnswers = [...prevState];
+        newAnswers[props.answerIndex] = "";
         return newAnswers;
       });
     }
@@ -62,7 +56,7 @@ function InputAnswer(props) {
     let answerSaved = "";
     for (let i = 0; i < rowRef.current.children.length; i++) {
       const child = rowRef.current.children[i];
-      if (child.innerText != "") {
+      if (child.innerText !== "") {
         child.style.backgroundColor = GREEN;
         child.style.borderColor = GREEN;
         child.style.color = "white";
@@ -71,8 +65,8 @@ function InputAnswer(props) {
     }
 
     if (
-      answerSaved != "" &&
-      answerRef.current.value.toUpperCase() == answerSaved
+      answerSaved !== "" &&
+      answerRef.current.value.toUpperCase() === answerSaved
     ) {
       // Show "Saved" notification from screen
       if (!loadFinish) {
@@ -82,14 +76,8 @@ function InputAnswer(props) {
 
       // "Return" saved answer to AnswersContext
       setAnswers((prevState) => {
-        let newAnswers = [...Array(prevState.length)];
-        for (let i = 0; i < prevState.length; i++) {
-          if (i == props.answerIndex) {
-            newAnswers[i] = answerSaved;
-          } else {
-            newAnswers[i] = prevState[i];
-          }
-        }
+        let newAnswers = [...prevState];
+        newAnswers[props.answerIndex] = answerSaved;
         return newAnswers;
       });
     }
@@ -97,7 +85,7 @@ function InputAnswer(props) {
 
   useEffect(() => {
     inputAnswerRef.current.addEventListener("keydown", (event) => {
-      if (event.key == "Enter") handleRefresh();
+      if (event.key === "Enter") handleRefresh();
     });
   }, [inputAnswerRef]);
 

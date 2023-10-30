@@ -43,7 +43,7 @@ nav {
   color: black;
   font-size: 48px;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    "Lucida Sans Unicode", Geneva, Verdana, Arial, sans-serif;
   margin: 0;
 }
 
@@ -70,14 +70,18 @@ nav {
 /* Mobile Devices */
 @media only screen and (max-device-width: 600px) {
   .more-info {
-    width: 100px;
+    width: 125px;
+    margin: 5px;
   }
 
   .question-mark {
-    width: 65px;
+    width: 80px;
+    margin: 15px;
   }
 
   .yourdle-title {
-    font-size: 80px;
+    font-size: 100px;
+    margin: 5px;
+    font-family: Helvetica, sans-serif;
   }
 }
