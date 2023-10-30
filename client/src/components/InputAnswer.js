@@ -26,7 +26,7 @@ function InputAnswer(props) {
       const regex = /[a-zA-z]*/;
       if (
         answerVal.length >= MIN_TILES &&
-        answerVal.match(regex) === answerVal
+        answerVal.match(regex) == answerVal
       ) {
         for (let i = 0; i < answerVal.length; i++) {
           answerArr.push(answerVal.charAt(i).toUpperCase());
@@ -45,7 +45,9 @@ function InputAnswer(props) {
       // Reset saved answers back to unsaved
       setAnswers((prevState) => {
         let newAnswers = [...prevState];
+        // console.log(newAnswers); // TODO: delete this
         newAnswers[props.answerIndex] = "";
+        // console.log(newAnswers); // TODO: delete this
         return newAnswers;
       });
     }

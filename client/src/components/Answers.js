@@ -81,6 +81,8 @@ function Answers() {
   useEffect(() => {
     const cleanAnswers = removeEmpty(answers);
 
+    // console.log(answers); // TODO: delete this
+
     // Change color if "Finish ->" text depending on number of answers saved
     if (cleanAnswers.length >= 1) {
       finishTextRef.current.style.color = "olive"; // "Finish ->" color is olive when at least one answer is saved
