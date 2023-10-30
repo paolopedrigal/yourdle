@@ -4,7 +4,7 @@ import "./Board.css";
 import { removeEmpty } from "../utils/utils.js";
 
 function Board() {
-  const { keyPress, answers, setAnswers, setKeyboardUpdate } =
+  const { keyPress, answers, setAnswers, setKeyboardUpdate, isAdmin } =
     useContext(GameContext);
   const numRows = 6; // number of guesses in the game
   const CURRENT_ANSWER = 0; // used for indexing answers array
@@ -27,6 +27,7 @@ function Board() {
   const DARK_GRAY = "rgb(129, 131, 132)"; // dark gray color
   const LIGHT_GRAY = "rgb(211, 214, 218)"; // light gray color
   const YELLOW = "rgb(181, 159, 59)"; // yellow color
+  const LILAC = "rgb(200, 162, 200)"; // lilac color (for admin)
 
   // useState callback function handlers
   function incrementGuessLetter() {
@@ -80,9 +81,9 @@ function Board() {
       if (answers[CURRENT_ANSWER].includes(tile.innerText)) {
         // If letter is in same position as letter, background color is green
         if (tile.innerText === answers[CURRENT_ANSWER][i % numTiles]) {
-          tile.style.backgroundColor = GREEN;
-          tile.style.borderColor = GREEN;
-          guess[tile.innerText] = GREEN;
+          tile.style.backgroundColor = isAdmin ? LILAC : GREEN;
+          tile.style.borderColor = isAdmin ? LILAC : GREEN;
+          guess[tile.innerText] = isAdmin ? LILAC : GREEN;
         }
         // Else, background color is yellow
         else {
