@@ -21,7 +21,7 @@ function Game() {
 
   async function getAnswersRequest(code) {
     try {
-      const results = Fetch.get("/get-answers/" + code, {
+      const results = Fetch.get("/get-answers/", {
         params: {
           code: code,
         },

@@ -5,7 +5,7 @@ const cors = require("cors");
 const db = require("./database/index.js");
 const cron = require("node-cron");
 const app = express();
-const port = process.env.PORT; // get port number from .env file
+const port = process.env.PORT || 3001; // get port number from .env file
 
 // Configure body-parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -56,7 +56,7 @@ app.get("/api/get-user/", async (req, res) => {
 });
 
 // Check if answers exists (by seeing if first answer is input) when given a username
-app.get("/api/check-answers/:username", async (req, res) => {
+app.get("/api/check-answers/", async (req, res) => {
   try {
     const username = req.query.username;
     const results = await db.query(
@@ -73,7 +73,7 @@ app.get("/api/check-answers/:username", async (req, res) => {
 });
 
 // RETRIEVE answers of a given code
-app.get("/api/get-answers/:code", async (req, res) => {
+app.get("/api/get-answers/", async (req, res) => {
   try {
     const code = req.query.code;
     const results = await db.query(
@@ -90,7 +90,7 @@ app.get("/api/get-answers/:code", async (req, res) => {
 });
 
 // UPDATE answers of a given user
-app.put("/api/create-yourdle/:username", async (req, res) => {
+app.put("/api/create-yourdle/", async (req, res) => {
   try {
     const username = req.body.username;
     const answer1 = req.body.answer1;

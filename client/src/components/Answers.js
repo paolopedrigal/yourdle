@@ -94,7 +94,7 @@ function Answers() {
   async function checkAnswersRequest() {
     try {
       // Check if given user has any answers already
-      const results = await Fetch.get("/check-answers/" + params.name, {
+      const results = await Fetch.get("/check-answers/", {
         params: {
           username: params.name,
         },
@@ -108,7 +108,7 @@ function Answers() {
   async function updateAnswersRequest(answersArr) {
     try {
       // Update answers for the specific user
-      const results = await Fetch.put("/create-yourdle/" + params.name, {
+      const results = await Fetch.put("/create-yourdle/", {
         username: params.name,
         answer1: answersArr.shift(),
         answer2: answersArr.length >= 1 ? answersArr.shift() : "",
