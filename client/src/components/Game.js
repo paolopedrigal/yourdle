@@ -34,6 +34,8 @@ function Game() {
 
   useEffect(() => {
     getAnswersRequest(params.code).then((results) => {
+      console.log(results); // TODO: delete this
+
       if (results.data.data.length !== 0) {
         let resultsAnswers = results.data.data[0];
         setAnswers(Object.values(resultsAnswers));

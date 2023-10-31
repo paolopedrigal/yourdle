@@ -63,7 +63,7 @@ app.get("/api/check-answers/", async (req, res) => {
       "SELECT answer1 FROM Users WHERE username=$1",
       [username]
     ); // Need to only check answer1 to see if user has answers
-    res.status(201).json({
+    res.status(200).json({
       status: "success",
       data: results.rows,
     });
@@ -80,7 +80,7 @@ app.get("/api/get-answers/", async (req, res) => {
       "SELECT answer1, answer2, answer3, answer4, answer5 FROM Users WHERE code=$1",
       [code]
     );
-    res.status(201).json({
+    res.status(200).json({
       status: "success",
       data: results.rows,
     });
@@ -106,7 +106,7 @@ app.put("/api/create-yourdle/", async (req, res) => {
       [answer1, answer2, answer3, answer4, answer5, username]
     );
 
-    res.status(201).json({
+    res.status(200).json({
       status: "success",
       data: results.rows,
     });
