@@ -45,8 +45,6 @@ function Credentials() {
       else {
         // Check if code exists within in the database
         getUserRequest("", code).then((results) => {
-          console.log(results); // TODO: delete this
-
           if (results.data.data.length === 1) {
             // If the code is found, then navigate to yourdle page
             navigate("/yourdle/" + code);
@@ -102,7 +100,6 @@ function Credentials() {
   function checkInvalidCredentials() {
     // Shake (user)code field if empty
     if (!codeRef.current.value) {
-      console.log("no code??"); // TODO: delete this
       codeRef.current.classList.add("animate__animated", "animate__shakeY");
       setTimeout(() => {
         codeRef.current.classList.remove(

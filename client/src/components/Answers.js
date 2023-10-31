@@ -52,6 +52,8 @@ function Answers() {
 
       // Check database for submitted answers
       checkAnswersRequest().then((results) => {
+        console.log(results); // TODO: delete this
+
         // If the user exists in the database
         if (results.data.data.length !== 0) {
           // If the user already has answers
@@ -80,8 +82,6 @@ function Answers() {
   // Called every time when user modifies answers (array state)
   useEffect(() => {
     const cleanAnswers = removeEmpty(answers);
-
-    // console.log(answers); // TODO: delete this
 
     // Change color if "Finish ->" text depending on number of answers saved
     if (cleanAnswers.length >= 1) {
