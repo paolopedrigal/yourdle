@@ -21,7 +21,7 @@ function Game() {
 
   async function getAnswersRequest(code) {
     try {
-      const results = Fetch.get(Fetch.defaults.baseURL + "/get-answers/", {
+      const results = Fetch.get("/get-answers/", {
         params: {
           code: code,
         },
@@ -34,7 +34,7 @@ function Game() {
 
   useEffect(() => {
     getAnswersRequest(params.code).then((results) => {
-      console.log(results); // TODO: delete this
+      console.log("testing\n" + results); // TODO: delete this
 
       if (results.data.data.length !== 0) {
         let resultsAnswers = results.data.data[0];
