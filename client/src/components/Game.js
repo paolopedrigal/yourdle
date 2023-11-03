@@ -21,12 +21,16 @@ function Game() {
 
   async function getAnswersRequest(code) {
     console.log(Fetch.defaults.baseURL);
+    console.log("test");
     try {
-      const results = await Fetch.get("/get-answers/", {
-        params: {
-          code: code,
-        },
-      });
+      const results = await Fetch.get(
+        Fetch.defaults.baseURL + "/get-answers/",
+        {
+          params: {
+            code: code,
+          },
+        }
+      );
       return results;
     } catch (error) {
       console.log(error);
