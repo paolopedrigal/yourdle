@@ -22,7 +22,7 @@ function Game() {
   async function getAnswersRequest(code) {
     console.log(Fetch.defaults.baseURL);
     try {
-      const results = Fetch.get("/get-answers/", {
+      const results = await Fetch.get("/get-answers/", {
         params: {
           code: code,
         },

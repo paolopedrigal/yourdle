@@ -5,7 +5,7 @@ const cors = require("cors");
 const db = require("./database/index.js");
 const cron = require("node-cron");
 const app = express();
-const port = process.env.PORT || 3005; // get port number from .env file
+const port = process.env.PORT || 3001; // get port number from .env file
 
 // Configure body-parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
