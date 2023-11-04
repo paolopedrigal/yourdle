@@ -5,6 +5,6 @@
 
 # Create a YOURDLE
 1. Enter a unique username in the USERNAME field.
-2. Enter a unique code in the CODE field.
+2. Enter a unique code in the CODE field. (The code is case-sensitive!)
 3. Click on "Click YOURDLE!" 
 NOTE: Usernames/codes will be deleted at the end of the day.

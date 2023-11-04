@@ -48,7 +48,7 @@
 }
 
 /* Mobile devices */
-@media only screen and (max-device-width: 600px) {
+@media only screen and (max-device-width: 400px) {
   .finish-container {
     padding: 30px;
   }

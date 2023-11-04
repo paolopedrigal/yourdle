@@ -45,9 +45,7 @@ function InputAnswer(props) {
       // Reset saved answers back to unsaved
       setAnswers((prevState) => {
         let newAnswers = [...prevState];
-        // console.log(newAnswers); // TODO: delete this
         newAnswers[props.answerIndex] = "";
-        // console.log(newAnswers); // TODO: delete this
         return newAnswers;
       });
     }

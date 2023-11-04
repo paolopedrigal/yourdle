@@ -23,7 +23,7 @@ textarea {
 }
 
 /* Mobile Devices */
-@media only screen and (max-device-width: 600px) {
+@media only screen and (max-device-width: 400px) {
   .more-info-info {
     font-size: 40px;
     width: 60%;

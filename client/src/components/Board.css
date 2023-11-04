@@ -22,7 +22,7 @@
 }
 
 /* Mobile devices */
-@media only screen and (max-device-width: 600px) {
+@media only screen and (max-device-width: 400px) {
   .board-tile {
     min-width: 125px;
     min-height: 125px;

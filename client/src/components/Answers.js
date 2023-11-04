@@ -52,8 +52,6 @@ function Answers() {
 
       // Check database for submitted answers
       checkAnswersRequest().then((results) => {
-        console.log(results); // TODO: delete this
-
         // If the user exists in the database
         if (results.data.data.length !== 0) {
           // If the user already has answers

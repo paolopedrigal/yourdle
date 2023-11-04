@@ -68,7 +68,7 @@ nav {
 }
 
 /* Mobile Devices */
-@media only screen and (max-device-width: 600px) {
+@media only screen and (max-device-width: 400px) {
   .more-info {
     width: 125px;
     margin: 5px;

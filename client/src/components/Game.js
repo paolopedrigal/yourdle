@@ -20,8 +20,6 @@ function Game() {
   const isAdmin = params.code === "maika"; // I am aware of this exposure
 
   async function getAnswersRequest(code) {
-    console.log(Fetch.defaults.baseURL);
-    console.log("test");
     try {
       const results = await Fetch.get(
         Fetch.defaults.baseURL + "/get-answers/",
@@ -39,8 +37,6 @@ function Game() {
 
   useEffect(() => {
     getAnswersRequest(params.code).then((results) => {
-      console.log(results); // TODO: delete this
-
       if (results.data.data.length !== 0) {
         let resultsAnswers = results.data.data[0];
         setAnswers(Object.values(resultsAnswers));

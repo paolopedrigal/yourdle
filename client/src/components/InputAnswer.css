@@ -79,7 +79,7 @@
 }
 
 /* Mobile devices */
-@media only screen and (max-device-width: 600px) {
+@media only screen and (max-device-width: 400px) {
   .enter-answer {
     width: 17rem;
     height: 4rem;
