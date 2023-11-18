@@ -84,10 +84,9 @@ function InputAnswer(props) {
   };
 
   useEffect(() => {
-    const regex = /[a-zA-z]*/; // TODO: delete this
-
+    const regex = /[a-zA-z]*/;
     inputAnswerRef.current.addEventListener("keydown", (event) => {
-      if (event.key.match(regex) == event.key) handleRefresh(); // TODO: delete this
+      if (event.key.match(regex) == event.key) handleRefresh();
       if (event.key === "Enter") handleSave();
     });
   }, [inputAnswerRef]);
