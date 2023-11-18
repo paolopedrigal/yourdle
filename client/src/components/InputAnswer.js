@@ -25,17 +25,14 @@ function InputAnswer(props) {
       const answerVal = answerRef.current.value;
       const regex = /[a-zA-z]*/;
       if (
-        answerVal.length >= MIN_TILES &&
+        answerVal.length + key.length >= MIN_TILES &&
+        answerVal.length + key.length <= MIN_TILES &&
         answerVal.match(regex) == answerVal
       ) {
         for (let i = 0; i < answerVal.length; i++) {
           answerArr.push(answerVal.charAt(i).toUpperCase());
         }
-        if (
-          key != "" &&
-          key.match(regex) == key &&
-          answerVal.length < MAX_TILES
-        )
+        if (key != "" && key.match(regex) == key)
           answerArr.push(key.toUpperCase());
         setAnswer(answerArr);
       }
