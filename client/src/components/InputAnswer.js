@@ -24,9 +24,10 @@ function InputAnswer(props) {
       let answerArr = [];
       const answerVal = answerRef.current.value;
       const regex = /[a-zA-z]*/;
+      console.log(answerVal, key);
       if (
         answerVal.length + key.length >= MIN_TILES &&
-        answerVal.length + key.length <= MIN_TILES &&
+        answerVal.length + key.length <= MAX_TILES &&
         answerVal.match(regex) == answerVal
       ) {
         for (let i = 0; i < answerVal.length; i++) {
@@ -55,6 +56,8 @@ function InputAnswer(props) {
   };
 
   const handleSave = () => {
+    if (answerRef.current.value.length < MIN_TILES) return;
+
     // Iterate through each tile to save answer. Change tiles to green.
     let answerSaved = "";
     for (let i = 0; i < rowRef.current.children.length; i++) {
