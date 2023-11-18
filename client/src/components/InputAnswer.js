@@ -18,7 +18,7 @@ function InputAnswer(props) {
   const DELAY = 3000; // 3 second
   let tileCount = 0;
 
-  const handleRefresh = () => {
+  const handleRefresh = (key) => {
     if (!loadFinish) {
       // Update answer state
       let answerArr = [];
@@ -31,6 +31,12 @@ function InputAnswer(props) {
         for (let i = 0; i < answerVal.length; i++) {
           answerArr.push(answerVal.charAt(i).toUpperCase());
         }
+        if (
+          key != "" &&
+          key.match(regex) == key &&
+          answerVal.length < MAX_TILES
+        )
+          answerArr.push(key.toUpperCase());
         setAnswer(answerArr);
       }
 
@@ -83,11 +89,42 @@ function InputAnswer(props) {
     }
   };
 
+  const handleBackspaceRefresh = () => {
+    if (!loadFinish) {
+      // Update answer state
+      let answerArr = [];
+      const answerVal = answerRef.current.value;
+      const regex = /[a-zA-z]*/;
+      if (answerVal.length > MIN_TILES && answerVal.match(regex) == answerVal) {
+        for (let i = 0; i < answerVal.length - 1; i++) {
+          answerArr.push(answerVal.charAt(i).toUpperCase());
+        }
+        setAnswer(answerArr);
+      }
+
+      // Use default color of tiles
+      for (let i = 0; i < rowRef.current.children.length; i++) {
+        const child = rowRef.current.children[i];
+        child.style.backgroundColor = "white";
+        child.style.borderColor = LIGHT_GRAY;
+        child.style.color = "black";
+      }
+
+      // Reset saved answers back to unsaved
+      setAnswers((prevState) => {
+        let newAnswers = [...prevState];
+        newAnswers[props.answerIndex] = "";
+        return newAnswers;
+      });
+    }
+  };
+
   useEffect(() => {
     const regex = /[a-zA-z]*/;
     inputAnswerRef.current.addEventListener("keydown", (event) => {
-      if (event.key.match(regex) == event.key) handleRefresh();
-      if (event.key === "Enter") handleSave();
+      if (event.key === "Backspace") handleBackspaceRefresh();
+      else if (event.key === "Enter") handleSave();
+      else if (event.key.match(regex) == event.key) handleRefresh(event.key);
     });
   }, [inputAnswerRef]);
 
@@ -107,7 +144,7 @@ function InputAnswer(props) {
           src={refresh}
           alt="Refresh"
           className="refresh"
-          onClick={handleRefresh}
+          onClick={() => handleRefresh("")}
         ></input>
         <input
           type="image"
