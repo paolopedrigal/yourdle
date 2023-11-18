@@ -171,7 +171,9 @@ function Answers() {
           </button>
         </div>
       </div>
-      <AnswersContext.Provider value={{ setIsFinished, setLoadFinish }}>
+      <AnswersContext.Provider
+        value={{ setIsFinished, setLoadFinish, answers }}
+      >
         {loadFinish ? (
           <div className="confirm-finish-box">
             <Finish invalid={invalidFinish} />

@@ -9,6 +9,20 @@
   text-align: center;
 }
 
+.confirm-finish-answers-prompt {
+  text-align: center;
+}
+
+.confirm-finish-answers {
+  margin: 25px;
+  text-align: center;
+}
+
+.finish-answer {
+  font-size: 20px;
+  margin: 0;
+}
+
 .button-container {
   display: flex;
   flex-direction: row;
@@ -56,6 +70,15 @@
   .confirm-finish-prompt {
     font-size: 60px;
   }
+
+  .confirm-finish-answers-prompt {
+    font-size: 50px;
+  }
+
+  .finish-answer {
+    font-size: 40px;
+  }
+
   .confirm-finish-button {
     font-size: 45px;
     padding: 20px;
