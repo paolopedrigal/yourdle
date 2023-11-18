@@ -24,7 +24,6 @@ function InputAnswer(props) {
       let answerArr = [];
       const answerVal = answerRef.current.value;
       const regex = /[a-zA-z]*/;
-      console.log(answerVal, key);
       if (
         answerVal.length + key.length >= MIN_TILES &&
         answerVal.length + key.length <= MAX_TILES &&
