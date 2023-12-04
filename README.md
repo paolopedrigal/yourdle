@@ -1,5 +1,7 @@
 # [YOURDLE](https://www.yourdle.lol/)
 
+![License Static Badge](https://img.shields.io/badge/license-MIT-orange)
+
 ## Description
 
 A website application that allows users to create their _own_ game of [WORDLE](https://www.nytimes.com/games/wordle/index.html) as well as view other custom games created by other users through a private code.
@@ -53,3 +55,7 @@ Play YOURDLE live [here!](https://www.yourdle.lol/) (Full URL: https://www.yourd
   - To add answers, click the plus sign **+** button.
   - To remove answers, click the minus sign **-** button.
 - To finsh creating a YOURDLE, click on the **Finish ->** button.
+
+## License
+
+MIT License.
